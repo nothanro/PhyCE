@@ -8,7 +8,7 @@ REPO := $(abspath $(HG)/../..)
 # plus HOSTGIAC for the 64-bit host changes of host.patch; FLOWCE (giac's FlowCE code: implicitdiff,
 # DeltaCE's faster definite integrals) and WITH_STATS (the steps build's statistics) as on the calculator
 DEFS := -DHOSTGIAC -DTICE -DFLOWCE -DHAVE_CONFIG_H -DXLIGHT -DCOMPILE_FOR_STABILITY -DMP_16BIT \
-        -DWITH_LAPLACE -DWITH_DESOLVE -DWITH_EQW -DWITH_PLOT -DWITH_STATS
+        -DWITH_LAPLACE -DWITH_DESOLVE -DWITH_EQW -DWITH_PLOT -DWITH_STATS $(EXTRA_DEFS)
 SAN ?= -fsanitize=address -fno-omit-frame-pointer
 OPT ?= -O1
 # CEdev: -fno-exceptions -fno-threadsafe-statics, its own small C++ headers (here: include/).
@@ -31,7 +31,7 @@ endif
 USTL_SRC := $(wildcard $(T)/ustlsrc/*.cc)
 TOM_SRC := $(wildcard $(REPO)/src/tommath/*.c)
 # KhiCAS's input pre-pass (TI implicit multiplication), used by the driver's -i option
-KHI_SRC := $(REPO)/src/tiinput.cc $(REPO)/src/tiinput_glue.cc $(REPO)/src/steps.cc $(REPO)/src/analyze.cc
+KHI_SRC := $(REPO)/src/tiinput.cc $(REPO)/src/tiinput_glue.cc $(REPO)/src/steps.cc $(REPO)/src/physics.cc $(REPO)/src/analyze.cc
 # the steps screen, drawn off screen (the driver's -V option), with the math layout it uses
 ifeq ($(KDISPLAY),1)
 KHI_SRC += $(REPO)/src/focus_steps.cc $(REPO)/src/ui_math.cc $(REPO)/src/mathinput.cc

@@ -2,7 +2,7 @@
 // Built for size: a step stores a rule number and its parts. Each rule's math line is a template
 // (giac syntax; A, B, C the parts, V the variable, dV and dA their differentials) filled only when
 // the step is shown. The methods share helpers: a rewritten integrand (via), a substitution (sub).
-#if defined FLOWCE_STEPS || defined HOSTGIAC
+#if (defined FLOWCE_STEPS || defined HOSTGIAC) && !defined PHYSCE // (Phy CE: src/physics.cc instead)
 #include "steps.h"
 #ifdef TICE
 extern "C" volatile unsigned char focus_phase; // focus.cc: timing probe (tools/emu/phases.py)

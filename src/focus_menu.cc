@@ -25,6 +25,7 @@ struct fm_item { const char * text; signed char back; const char * pv; const cha
 // preview, label and hint in a row: the steps build's Applications)
 struct fm_menu { char grid, cols, n; const fm_item * items; char wide; };
 
+#ifndef PHYSCE // (Phy CE: its own cards, below)
 static const fm_item m_alg[] = {
   {"solve(,x)", 3, 0, "Solve for x", 0, 0},
   {"solve([,],[x,y])", 9, 0, "Solve a system", 0, 0}, // (DeltaCE: its steps, elimination)
@@ -48,6 +49,7 @@ static const fm_item m_calc[] = {
   {0, 0, "integrate(f-g,x,a,b)", "Applications", "area, volume, arc length, more", FA_APPS},
 #endif
 };
+#endif
 #ifdef FLOWCE_STEPS
 // the calculus card's applications (steps.cc): each card shows its integral; a, b left empty: where
 // the curves meet
@@ -60,6 +62,7 @@ static const fm_item m_apps[] = { // (each opens its form: app_form)
   {0, 0, "1/(b-a)*integrate(f,x,a,b)", "Average value", 0, 0},
 };
 #endif
+#ifndef PHYSCE
 static const fm_item m_trig[] = {
   {"sin()", 1, 0, 0, 0, 0}, {"cos()", 1, 0, 0, 0, 0}, {"tan()", 1, 0, 0, 0, 0},
   {"asin()", 1, 0, 0, 0, 0}, {"acos()", 1, 0, 0, 0, 0}, {"atan()", 1, 0, 0, 0, 0},
@@ -103,7 +106,76 @@ static const fm_item m_math[] = {
   {"logb(,)", 1, 0, 0, 0, 0}, {"surd(,)", 2, 0, 0, 0, 0}, {"exp()", 1, 0, 0, 0, 0},
 };
 #endif
+#endif // !PHYSCE
+#ifdef PHYSCE
+// Phy CE: F1-F4 are the physics cards, a tile per problem (each opens its form: phys_form); F5 more
+static const fm_item m_motion[] = {
+  {0, 0, "omega=omega0+alpha*t", "Angular kinematics", 0, 0},
+  {0, 0, "v_t=omega*r", "Point on a spinning object", 0, 0},
+  {0, 0, "omega=2*pi*f", "Period and frequency", 0, 0},
+};
+static const fm_item m_torque[] = {
+  {0, 0, "tau=r*F*sin(phi)", "Torque", 0, 0},
+  {0, 0, "tau_net=tau_ccw-tau_cw", "Net torque", 0, 0},
+  {0, 0, "x_com=(sum(m*x))/M", "Center of mass", 0, 0},
+  {0, 0, "sum(tau)=0", "Beam in equilibrium", 0, 0},
+  {0, 0, "tan(theta)=w/h", "Tipping a box", 0, 0},
+};
+static const fm_item m_inertia[] = {
+  {0, 0, "I=sum(m*r^2)", "Point masses", 0, 0},
+  {0, 0, "I=I_com+M*h^2", "Parallel axis", 0, 0},
+  {0, 0, "tau=I*alpha", "Newton's 2nd law", 0, 0},
+  {0, 0, "m*g-T=m*a", "Pulley and hanging mass", 0, 0},
+  {0, 0, "a=((m2-m1)*g)/(m1+m2+M/2)", "Atwood machine", 0, 0},
+};
+static const fm_item m_energy[] = {
+  {0, 0, "K=1/2*I*omega^2", "Rotational energy", 0, 0},
+  {0, 0, "v=sqrt((2*g*h)/(1+k))", "Rolling down a ramp", 0, 0},
+  {0, 0, "I1*omega1=I2*omega2", "Shape change", 0, 0},
+  {0, 0, "(I1+I2)*omega", "Disks that grab", 0, 0},
+};
+static const fm_item m_more[] = {
+  {0, 0, 0, "Unit conversions", "rpm, rev, deg, cm, g", FA_CONV},
+  {0, 0, 0, "Formula reference", "by topic", FA_REFS},
+  {0, 0, 0, "Units", "type a unit", FA_UNITS},
+  {0, 0, 0, "Themes", "colors", FA_THEME},
+  {0, 0, 0, "File", "sessions", FA_FILE},
+  {0, 0, 0, "Clear history", 0, FA_CLEAR},
+};
+static const fm_item m_math[] = { // the math key: what typing physics needs
+  {"()/()", 4, 0, 0, 0, 0}, {"sqrt()", 1, 0, 0, 0, 0}, {"^()", 1, 0, 0, 0, 0},
+  {"sin()", 1, 0, 0, 0, 0}, {"cos()", 1, 0, 0, 0, 0}, {"tan()", 1, 0, 0, 0, 0},
+  {"asin()", 1, 0, 0, 0, 0}, {"acos()", 1, 0, 0, 0, 0}, {"atan()", 1, 0, 0, 0, 0},
+  {"pi", 0, 0, 0, 0, 0}, {"abs()", 1, 0, 0, 0, 0}, {"[,]", 2, 0, 0, 0, 0},
+};
+// more > Unit conversions (physics.cc's UC, in its order), Formula reference (its topics), Units
+static const fm_item m_conv[] = {
+  {0, 0, 0, "rpm to rad/s", 0, 0}, {0, 0, 0, "rad/s to rpm", 0, 0}, {0, 0, 0, "rev to rad", 0, 0}, {0, 0, 0, "rad to rev", 0, 0},
+  {0, 0, 0, "deg to rad", 0, 0}, {0, 0, 0, "rad to deg", 0, 0}, {0, 0, 0, "rev/s to rad/s", 0, 0}, {0, 0, 0, "cm to m", 0, 0},
+  {0, 0, 0, "g to kg", 0, 0}, {0, 0, 0, "km/h to m/s", 0, 0}, {0, 0, 0, "kg to N (its weight)", 0, 0},
+};
+static const fm_item m_refs[] = {
+  {0, 0, 0, "Angles and speeds", "rad, rev, period", 0}, {0, 0, 0, "Kinematics", "the four equations", 0},
+  {0, 0, 0, "A point on the object", "v, a, rolling", 0}, {0, 0, 0, "Torque", "one force, several", 0},
+  {0, 0, 0, "Equilibrium", "center of mass", 0}, {0, 0, 0, "Moment of inertia", "shapes, parallel axis", 0},
+  {0, 0, 0, "Newton's 2nd law", "pulleys", 0}, {0, 0, 0, "Energy", "rolling, work", 0},
+  {0, 0, 0, "Angular momentum", "conservation", 0},
+};
+static const fm_item m_units[] = { // (a unit goes after a number: 5_m; the (-) key after a number types _)
+  {"_m", 0, 0, 0, 0, 0}, {"_cm", 0, 0, 0, 0, 0}, {"_kg", 0, 0, 0, 0, 0}, {"_g", 0, 0, 0, 0, 0},
+  {"_s", 0, 0, 0, 0, 0}, {"_min", 0, 0, 0, 0, 0}, {"_N", 0, 0, 0, 0, 0}, {"_J", 0, 0, 0, 0, 0},
+  {"_rad", 0, 0, 0, 0, 0}, {"_deg", 0, 0, 0, 0, 0}, {"_rev", 0, 0, 0, 0, 0}, {"_rpm", 0, 0, 0, 0, 0},
+};
+#endif
 #define N(a) (char)(sizeof(a) / sizeof(a[0]))
+#ifdef PHYSCE
+static const fm_menu M_APPS = {2, 2, N(m_apps), m_apps}; // (FlowCE's applications' forms: unused, kept for their code)
+static const fm_menu M_CONV = {0, 1, N(m_conv), m_conv}, M_REFS = {0, 1, N(m_refs), m_refs}, M_UNITS = {1, 4, N(m_units), m_units};
+static const fm_menu MENUS[6] = { // F1 F2 F3 F4 F5 math
+  {2, 2, N(m_motion), m_motion}, {2, 2, N(m_torque), m_torque}, {2, 2, N(m_inertia), m_inertia},
+  {2, 2, N(m_energy), m_energy}, {0, 1, N(m_more), m_more}, {1, 3, N(m_math), m_math},
+};
+#else
 #ifdef FLOWCE_STEPS
 #ifdef FLOWCE_TILOOK
 static const fm_menu M_APPS = {0, 1, N(m_apps), m_apps}; // (a list, as the OS's menus)
@@ -127,6 +199,7 @@ static const fm_menu MENUS[6] = { // F1 F2 F3 F4 F5 math
   {1, 4, N(m_sym), m_sym}, {0, 1, N(m_more), m_more}, {1, 3, N(m_math), m_math},
 };
 #endif
+#endif // !PHYSCE
 #undef N
 
 enum { RH = 30, LW = 252, CH = 40, CH2 = 60, BH = 36, ST = FOCUS_SB, SBOT = UI_H - FOCUS_MB }; // BH: a wide item's bar
@@ -201,7 +274,7 @@ static signed char PLV[60];
 // The fixed menus' previews (the F-keys' cards, the applications'), kept once laid out: laying them
 // out again took a third of the calculus card's opening. Given back when the heap runs out.
 struct kept { mi_layout * L; short w, h; signed char lv[16]; };
-enum { NKEPT = 7 };
+enum { NKEPT = 9 }; // (Phy CE: 6, 7, 8 its more card's cards: conversions, reference, units)
 static kept * KP[NKEPT];
 static void drop_pl() { // PL let go (kept ones stay)
   for (int c = 0; c < NKEPT; ++c) if (PL && KP[c] && PL == KP[c]->L) { PL = 0; return; }
@@ -286,7 +359,7 @@ static void prepare(const fm_menu & m) {
 // pressed meanwhile is kept (prepare latches keys) and read right after
 extern "C" void focus_warm(void) {
   static signed char next;
-#ifdef FLOWCE_STEPS
+#if defined FLOWCE_STEPS && !defined PHYSCE
   enum { NW = 7 };
 #else
   enum { NW = 6 };
@@ -987,6 +1060,10 @@ void focus_splash(int first) {
   static const char name[] = "KhiCAS + Flow"; // KhiCAS in ink, + gray, Flow in the accent
   enum { NL = 13 };
   static const unsigned char lcol[NL] = {UC_INK, UC_INK, UC_INK, UC_INK, UC_INK, UC_INK, UC_SUB, UC_SUB, UC_SUB, UC_ACC, UC_ACC, UC_ACC, UC_ACC};
+#elif defined PHYSCE
+  static const char name[] = "PhyCE";
+  enum { NL = 5 };
+  static const unsigned char lcol[NL] = {UC_INK, UC_INK, UC_INK, UC_ACC, UC_ACC};
 #else
   static const char name[] = "FlowCE";
   enum { NL = 6 };
@@ -995,6 +1072,9 @@ void focus_splash(int first) {
 #ifdef FLOWCE_KHICAS
   const char * tag = "computer algebra system by Bernard Parisse"; // (what KhiCAS is, and its author)
   enum { NT = 6 }; // KhiCAS: typed behind a cursor, before + Flow flows in
+#elif defined PHYSCE
+  enum { NT = 0 };
+  const char * tag = "physics on your TI-84 Plus CE";
 #else
   enum { NT = 0 };
   const char * tag = "calculus on your TI-84 Plus CE";
@@ -1656,6 +1736,261 @@ static const char * app_form(int k, int oy) {
     if (os != sel || oe || af_err) af_paint(hy, hy + AF_BOT, 0);
   }
 }
+#ifdef PHYSCE
+// ------------------------------------------------------------------ Phy CE: the physics forms
+// A tile of a physics card opens its problem's form in the card's place, drawn and typed as the
+// applications' forms above: a field per argument, its word and its letter on its left, what it
+// means left empty inside it (0: needed: enter asks for it), its hint under the form. enter on the
+// last field: the call (torque(r=0.35,F=120,phi=40)) for the console to run; physics.cc answers it.
+// The values stay for the next time the same form opens.
+struct pf_field { const char * arg, * word, * var, * empty, * hint; };
+struct pf_form { const char * call; pf_field f[5]; };
+static const pf_form PF[] = {
+  // motion
+  {"kinematics", {{"Dtheta", "angle", "Dtheta", "unknown", "turned: rad, or with a unit: 3_rev"},
+                  {"omega0", "start", "omega0", "unknown", "starting speed: rad/s, or 1200_rpm"},
+                  {"omega", "end", "omega", "unknown", "final speed: rad/s, or _rpm"},
+                  {"alpha", "accel.", "alpha", "unknown", "rad/s^2; fill in three of the five"},
+                  {"t", "time", "t", "unknown", "s"}}},
+  {"spinpoint", {{"r", "radius", "r", 0, "distance from the axis, m"},
+                 {"omega", "speed", "omega", 0, "rad/s, or 1200_rpm"},
+                 {"alpha", "accel.", "alpha", "0: steady", "rad/s^2"}}},
+  {"period", {{"T", "period", "T", "unknown", "seconds per turn"},
+              {"f", "freq.", "f", "unknown", "turns per second, Hz"},
+              {"omega", "speed", "omega", "unknown", "rad/s; fill in one of the three"}}},
+  // torque
+  {"torque", {{"r", "lever", "r", 0, "pivot to where the force acts, m"},
+              {"F", "force", "F", 0, "N"},
+              {"phi", "angle", "phi", "or the next one", "between r and F, degrees"},
+              {"phi_perp", "or", "phi_perp", "or the one above", "F's angle from perpendicular, degrees"}}},
+  {"nettorque", {{"F", "forces", "F", 0, "[30,-50]: + turns counterclockwise"},
+                 {"r", "levers", "r", 0, "[0.4,0.2]: one per force, m"},
+                 {"phi", "angles", "phi", "90 each", "[90,30]: one per force, degrees"}}},
+  {"com", {{"m", "masses", "m", 0, "[2,3,5], kg"},
+           {"x", "at", "x", 0, "[0,1,2.5], m"},
+           {"y", "and", "y", "on a line", "[0,0,3], m"}}},
+  {"beam", {{"s", "supports", "s", 0, "[x1,x2]: from the left end, m"},
+            {"M", "beam", "M", "no mass", "the beam's mass, kg"},
+            {"L", "length", "L", "not needed", "m: its weight acts at L/2"},
+            {"m", "loads", "m", "none", "[60,20], kg"},
+            {"x", "at", "x", "none", "[4.2,1]: from the left end, m"}}},
+  {"tipping", {{"h", "height", "h", 0, "the box's height, m"},
+               {"w", "width", "w", 0, "its width, m"}}},
+  // inertia
+  {"inertia", {{"m", "masses", "m", 0, "[0.5,0.5], kg"},
+               {"r", "from axis", "r", 0, "[0,0.4]: one per mass, m"}}},
+  {"parallelaxis", {{"I_com", "center", "I_com", "unknown", "about the center of mass, kg m^2"},
+                    {"M", "mass", "M", "unknown", "kg"},
+                    {"h", "shift", "h", "unknown", "between the two axes, m"},
+                    {"I", "new axis", "I", "unknown", "kg m^2; fill in three of the four"}}},
+  {"taualpha", {{"tau", "torque", "tau", "unknown", "net torque, N m"},
+                {"I", "inertia", "I", "unknown", "kg m^2"},
+                {"alpha", "accel.", "alpha", "unknown", "rad/s^2; fill in two of the three"}}},
+  {"pulley", {{"m", "hanging", "m", 0, "the hanging mass, kg"},
+              {"M", "pulley", "M", "with its I", "the pulley's mass, kg"},
+              {"R", "radius", "R", "not needed", "m"},
+              {"I", "its", "I", "a solid disk", "kg m^2 (give R too)"},
+              {"h", "falls", "h", "no speed", "how far it falls, m"}}},
+  {"atwood", {{"m1", "one side", "m1", 0, "kg"},
+              {"m2", "other", "m2", 0, "kg"},
+              {"M", "pulley", "M", "no mass", "the pulley's mass, kg"},
+              {"R", "radius", "R", "not needed", "m (with I)"},
+              {"I", "its", "I", "a solid disk", "kg m^2"}}},
+  // energy
+  {"rotke", {{"I", "inertia", "I", 0, "kg m^2"},
+             {"omega", "speed", "omega", 0, "rad/s, or 300_rpm"},
+             {"tau", "torque", "tau", "none", "N m: its work, or the angle to stop"},
+             {"Dtheta", "angle", "Dtheta", "none", "rad, or 5_rev"}}},
+  {"rolling", {{"h", "height", "h", 0, "how far it drops, m"},
+               {"k", "shape", "k", 0, "I = k M R^2: sphere 2/5, disk 1/2, hoop 1"},
+               {"R", "radius", "R", "skip", "m: its angular speed"},
+               {"M", "mass", "M", "skip", "kg: its energies"}}},
+  {"shapechange", {{"I1", "before", "I1", "unknown", "kg m^2"},
+                   {"omega1", "", "omega1", "unknown", "rad/s"},
+                   {"I2", "after", "I2", "unknown", "kg m^2"},
+                   {"omega2", "", "omega2", "unknown", "rad/s; fill in three of the four"}}},
+  {"disks", {{"I1", "spinning", "I1", 0, "kg m^2"},
+             {"omega1", "at", "omega1", 0, "rad/s"},
+             {"I2", "dropped", "I2", 0, "kg m^2"},
+             {"omega2", "at", "omega2", "0: at rest", "rad/s"}}},
+  // more > Unit conversions: one field, the conversion picked (pf_conv)
+  {"unitconv", {{"x", "value", 0, 0, "the number to convert"}}},
+};
+enum { PF_CONV = sizeof(PF) / sizeof(PF[0]) - 1 };
+static const unsigned char PF_TAB[4] = {0, 3, 8, 13}; // the first form of each card
+static char pf_val[5][AF_W];
+static signed char pf_last = -1, pf_conv; // the form whose values these are; the conversion picked
+static const char * pf_title;
+static int pf_n(int k) { int n = 0; while (n < 5 && PF[k].f[n].arg) ++n; return n; }
+// form k's call from its fields; 0 (*bad: the field to fill first, af_err why) if one is needed
+static const char * pf_call(int k, int * bad) {
+  static char c[24 + 5 * (AF_W + 12)];
+  const int n = pf_n(k);
+  for (int i = 0; i < n; ++i)
+    if (!pf_val[i][0] && !PF[k].f[i].empty) { *bad = i; af_err = "fill this in first"; return 0; }
+  strcpy(c, PF[k].call);
+  strcat(c, "(");
+  int first = 1;
+  for (int i = 0; i < n; ++i) {
+    if (!pf_val[i][0]) continue;
+    if (!first) strcat(c, ",");
+    first = 0;
+    strcat(c, PF[k].f[i].arg); strcat(c, "="); strcat(c, pf_val[i]);
+  }
+  if (k == PF_CONV) { // the conversion picked: k=7, k=10
+    char d[8] = ",k=";
+    int j = 3;
+    if (pf_conv >= 10) d[j++] = (char)('0' + pf_conv / 10);
+    d[j++] = (char)('0' + pf_conv % 10); d[j] = 0;
+    strcat(c, first ? d + 1 : d);
+  }
+  strcat(c, ")");
+  return c;
+}
+static void pf_layout(int i, int caret) {
+  const char * s = pf_val[i];
+  AFV[i] = (signed char)ui_math_fit(s, strlen(s), caret, 4, 2 * (pw - 122), AF_RH - 8, MI_F_CALLBOX, AFL[i]);
+  key_latch();
+}
+// the form's rows [b, e) in the band being drawn (all: with the card)
+static void pf_band(int b, int e, int all) {
+  const int k = af_k, sel = af_sel, n = pf_n(k);
+  const int fx = px + (IN == 2 ? 124 : 100), fw = pw - (IN == 2 ? 134 : 110), hy = py + ph - AF_BOT;
+  if (e <= py) return;
+  if (all) { // the card, the problem's name
+    card_bg();
+    ui_draw_text(&ui_tb12, pf_title, -1, px + 12, py + 20, ui_ramp(1, UC_INK, UC_CARD), 0);
+  }
+  for (int i = 0; i < n; ++i) { // a field: its label, right-aligned (the word, the letter in math), its box
+    const int y = py + AF_TOP + i * AF_RH, by = y + AF_RH / 2 + 4, on = i == sel, bg = on ? UC_ACCSOFT : UC_TILE;
+    if (y >= e || y + AF_RH <= b) continue;
+    const pf_field & f = PF[k].f[i];
+    const char * s = pf_val[i];
+    ui_clip(px + 4, y, px + pw - 4, y + AF_RH);
+    ui_fill(px + 4, y, pw - 8, AF_RH, ui_col(1, UC_CARD));
+    int lx = fx - 8;
+    if (f.var) {
+      mi_layout V;
+      const int lv = ui_math_fit(f.var, strlen(f.var), -1, 4, 60, 20, 0, V);
+      lx -= ui_text_width(&ui_mu17, "=", -1);
+      ui_draw_text(&ui_mu17, "=", -1, lx, by, ui_ramp(1, UC_INK, UC_CARD), 0);
+      lx -= V.width + 4;
+      ui_math_draw(V, f.var, lv, lx, by, 1, UC_INK, UC_CARD, UC_ACC);
+      lx -= 6;
+    }
+    if (f.word && *f.word) ui_draw_text(&ui_tr12, f.word, -1, lx - ui_text_width(&ui_tr12, f.word, -1), by, ui_ramp(1, UC_SUB, UC_CARD), 0);
+    ui_rrect(1, fx, y + 2, fw, AF_RH - 4, 6, bg, UC_CARD);
+    ui_clip(fx + 3, y + 2, fx + fw - 3, y + AF_RH - 2);
+    if (*s) {
+      const mi_layout & L = AFL[i];
+      int x = fx + 8;
+      if (on && x + L.cx > fx + fw - 10) x = fx + fw - 10 - L.cx;
+      const int base = y + AF_RH / 2 - (L.asc + L.desc) / 2 + L.asc;
+      ui_math_draw(L, s, AFV[i], x, base, 1, UC_INK, bg, UC_ACC);
+      if (on) ui_math_caret(L, x, base, 1, UC_ACC);
+    } else {
+      if (f.empty) ui_draw_text(&ui_tr10, f.empty, -1, fx + 13, by - 1, ui_ramp(1, UC_SUB, bg), 0);
+      if (on) ui_fill(fx + 8, y + 7, 2, AF_RH - 14, ui_col(1, UC_ACC));
+    }
+    ui_noclip();
+  }
+  if (hy < e && hy + AF_BOT > b) { // the field's hint (or why enter could not compute), what enter does
+    ui_clip(px + 4, hy, px + pw - 4, hy + AF_BOT - 3);
+    ui_fill(px + 4, hy, pw - 8, AF_BOT - 3, ui_col(1, UC_CARD));
+    ui_draw_text(&ui_tr10, af_err ? af_err : PF[k].f[sel].hint, -1, px + 12, hy + 12, ui_ramp(1, af_err ? UC_RED : UC_SUB, UC_CARD), 0);
+    const char * w = sel < n - 1 ? "next" : "solve";
+    const int kw = ui_text_width(&ui_tb10, "enter", -1), ww = ui_text_width(&ui_tr10, w, -1);
+    ui_draw_text(&ui_tr10, w, -1, px + pw - 16 - kw - ww, hy + 12, ui_ramp(1, UC_SUB, UC_CARD), 0);
+    ui_draw_text(&ui_tb10, "enter", -1, px + pw - 12 - kw, hy + 12, ui_ramp(1, UC_ACC, UC_CARD), 0);
+    ui_noclip();
+  }
+}
+static void pf_over(int b, int e) { pf_band(b, e, 1); }
+static void pf_paint(int y0, int y1, int all) {
+  const int rows = ui_band_open(48);
+  for (int b = y0; b < y1; b += rows ? rows : y1 - y0) {
+    const int e = rows && b + rows < y1 ? b + rows : y1;
+    if (rows) { ui_band_begin(b, e); ui_band_load(); }
+    else ui_clip(0, b, UI_W, e);
+    pf_band(b, e, all);
+    if (rows) ui_band_end();
+    ui_noclip();
+    key_latch();
+  }
+}
+// physics form k (its name title) over the dimmed scene, in the place of the card (its top oy):
+// the call to run, 0 when closed. The math key and F5's units card insert into the field.
+static const char * phys_form(int k, int oy, const char * title) {
+  if (k != pf_last) for (int i = 0; i < 5; ++i) pf_val[i][0] = 0; // (another problem: its own values)
+  pf_last = (signed char)k;
+  pf_title = title;
+  const int n = pf_n(k);
+  int caret[5];
+  for (int i = 0; i < n; ++i) caret[i] = strlen(pf_val[i]);
+  af_k = (signed char)k;
+  af_sel = 0;
+  pw = 310; ph = AF_TOP + n * AF_RH + AF_BOT; px = 1; py = SBOT - ph;
+  if (py > oy) focus_repaint(oy - 2, py); // (the card was taller)
+  for (int i = 0; i < n; ++i) pf_layout(i, i ? -1 : caret[0]);
+  af_err = 0;
+  pf_paint(py, SBOT, 1);
+  card_tab(cur < 5 ? cur : 4, 0);
+  for (;;) {
+    int key, sel = af_sel;
+    GetKey(&key);
+    if (key == KEY_CTRL_SHIFT || key == KEY_CTRL_ALPHA) continue;
+    char * s = pf_val[sel];
+    const int os = sel, oe = af_err != 0;
+    const mi_metrics & m = ui_math_metrics(AFV[sel], MI_F_CALLBOX);
+    af_err = 0;
+    if (key == KEY_CTRL_EXE || key == KEY_CTRL_OK) {
+      if (sel < n - 1) ++sel;
+      else if (const char * c = pf_call(k, &sel)) return c;
+    }
+    else if (key == KEY_CTRL_EXIT || key == KEY_CTRL_AC) {
+      if (!*s) return 0;
+      *s = 0;
+      caret[sel] = 0;
+    }
+    else if (key == KEY_CTRL_QUIT) return 0;
+    else if (key == KEY_CTRL_UP || key == KEY_CTRL_DOWN) {
+      const int up = key == KEY_CTRL_UP, q = mi_move(s, strlen(s), caret[sel], up ? 2 : 3, m);
+      if (q >= 0) caret[sel] = q;
+      else if (up ? sel > 0 : sel < n - 1) sel += up ? -1 : 1;
+    }
+    else if (key == KEY_CTRL_SYMB) { // the math key's templates (a fraction, a root, [ , ])
+      const int x0 = px, y0 = py, w0 = pw, h0 = ph, c0 = cur;
+      const char * t = 0;
+      int back = 0;
+      af_nest = 1;
+      const int a = focus_popover(key, &t, &back);
+      af_nest = 0;
+      const int top = py < y0 ? py : y0, len = strlen(s), tl = t ? strlen(t) : 0;
+      px = x0; py = y0; pw = w0; ph = h0; cur = c0;
+      if (a == FA_INSERT && tl && len + tl < AF_W) {
+        memmove(s + caret[sel] + tl, s + caret[sel], len - caret[sel] + 1);
+        memcpy(s + caret[sel], t, tl);
+        caret[sel] += tl - back;
+      }
+      pf_layout(sel, caret[sel]);
+      focus_repaint_over(top - 2, SBOT, pf_over);
+      focus_bar_redraw();
+      card_tab(cur < 5 ? cur : 4, 0);
+      continue;
+    }
+    else if (!af_edit(s, &caret[sel], key, m)) continue;
+    af_sel = (signed char)sel;
+    pf_layout(sel, caret[sel]);
+    const int y = py + AF_TOP + sel * AF_RH, hy = py + ph - AF_BOT;
+    pf_paint(y, y + AF_RH, 0);
+    if (os != sel) {
+      pf_layout(os, -1);
+      pf_paint(py + AF_TOP + os * AF_RH, py + AF_TOP + (os + 1) * AF_RH, 0);
+    }
+    if (os != sel || oe || af_err) pf_paint(hy, hy + AF_BOT, 0);
+  }
+}
+#endif
 #endif
 
 // ------------------------------------------------------------------ the themes
@@ -1755,9 +2090,15 @@ int focus_popover(int key, const char ** text, int * back) {
   const fm_menu * sub = 0; // the card opened from a card (the calculus card's applications)
   for (;;) {
     const fm_menu & m = sub ? *sub : MENUS[id];
+#ifdef PHYSCE
+    const int sel = sub ? (sub_last < m.n ? sub_last : 0) : pop_last[id] < m.n ? pop_last[id] : 0;
+    geometry(id, m);
+    prepare_kept(m, !sub ? id : sub == &M_REFS ? 7 : sub == &M_UNITS ? 8 : 6);
+#else
     const int sel = sub ? sub_last : pop_last[id] < m.n ? pop_last[id] : 0;
     geometry(id, m);
     prepare_kept(m, sub ? 6 : id);
+#endif
     open_card(m, id, 0, sel);
     cur = id;
     int r = run_keys(m, sel, fk_pop), res = FA_NONE;
@@ -1767,6 +2108,47 @@ int focus_popover(int key, const char ** text, int * back) {
       if (it.act) res = it.act;
       else { *text = it.text; *back = it.back; res = FA_INSERT; }
     }
+#ifdef PHYSCE
+    if (!sub && id < 4 && r >= 0 && !af_nest) { // a physics tile: its problem's form in the card's place;
+      drop_pl();                               // closed, the card again
+      if ((*text = phys_form(PF_TAB[id] + r, py, m.items[r].label))) {
+        close_card(0, 1);
+        return FA_RUN;
+      }
+      const int fy = py;
+      geometry(id, m);
+      if (py > fy) focus_repaint(fy - 2, py);
+      continue;
+    }
+    if (sub == &M_CONV && r >= 0) { // a conversion: its one-field form
+      drop_pl();
+      pf_conv = (signed char)r;
+      if ((*text = phys_form(PF_CONV, py, m.items[r].label))) {
+        close_card(0, 1);
+        return FA_RUN;
+      }
+      const int fy = py;
+      geometry(id, *sub);
+      if (py > fy) focus_repaint(fy - 2, py);
+      continue;
+    }
+    if (sub == &M_REFS && r >= 0) { // a topic of the formula reference: shown on the steps' page
+      static char rf[16];
+      strcpy(rf, "reference(k=0)");
+      rf[12] = (char)('0' + r);
+      *text = rf;
+      close_card(0, 1);
+      return FA_REF;
+    }
+    if ((res == FA_CONV || res == FA_REFS || res == FA_UNITS) && !af_nest) { // more's cards, in its place
+      const int oy = py;
+      drop_pl();
+      sub = res == FA_CONV ? &M_CONV : res == FA_REFS ? &M_REFS : &M_UNITS;
+      geometry(id, *sub);
+      if (py > oy) focus_repaint(oy - 2, py);
+      continue;
+    }
+#endif
 #ifdef FLOWCE_STEPS
     if (sub == &M_APPS && r >= 0) { // an application: its form in the card's place; closed, the
       drop_pl();                  // applications' card again

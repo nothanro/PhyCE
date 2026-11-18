@@ -1,5 +1,5 @@
-// The FlowCE web installer: checks the calculator, erases it (after the user agrees), sends the
-// version picked (files/FlowCE.b84, or files/KhiCAS-Flow.b84 for KhiCAS + Flow) over WebUSB
+// The Phy CE web installer (FlowCE's, renamed): checks the calculator, erases it (after the user
+// agrees), sends files/PhyCE.b84 over WebUSB
 // and opens its installer, which then needs one key press on the calculator. Steps and texts:
 // index.html.
 import { Calculator, KEY, LinkError, TI_CE, readBundle, readTIFile, readAppFile } from './dusb.js';
@@ -20,8 +20,7 @@ const WINDOWS = /Windows/i.test(navigator.userAgentData ? navigator.userAgentDat
 
 // The versions the page installs, with their version texts (site/build.sh puts them in files/)
 const BUILDS = { // (app: its name in the calculator's apps menu)
-  normal: { file: 'FlowCE.b84', ver: 'version.txt', name: 'FlowCE', app: 'FlowCE' },
-  khicas: { file: 'KhiCAS-Flow.b84', ver: 'version-khicas.txt', name: 'KhiCAS + Flow', app: 'KhiFlow' },
+  normal: { file: 'PhyCE.b84', ver: 'version.txt', name: 'Phy CE', app: 'PhyCE' },
 };
 const versions = {};      // their version texts once read ('' if the site doesn't have it)
 let build = 'normal';     // the version picked
@@ -266,10 +265,10 @@ async function check(c = calc) {
   else if (route === 'v2') lines.push('Using arTIfiCE v2.1 for this OS.');
   else lines.push('<span class="bad">This OS version could not be verified.</span> No installer will be sent. See <a href="#os-help">OS help</a>.');
   $('finish-intro').hidden = route === 'v3';
-  $('install-gif').hidden = route === 'v3';
+  if ($('install-gif')) $('install-gif').hidden = route === 'v3'; // (Phy CE: no install GIF)
   // only the free archive decides (the RAM figure a real calculator reports is not its free RAM:
   // it read as too little even right after a full reset, and the page erased again and again)
-  console.info('FlowCE: calculator', info);
+  console.info('Phy CE: calculator', info);
   const needErase = info.freeFlash !== null && info.freeFlash < need;
   if (info.freeFlash !== null)
     lines.push(`Free memory: ${MB(info.freeFlash)}` + (!needErase ? ` (enough for ${BUILDS[build].name}).`
@@ -353,7 +352,7 @@ async function erase(c) {
     await c.ping(180000); // answered once the erase is done (a timer for the slowest calculator)
     return c;
   } catch (e) {
-    console.warn('FlowCE: the calculator left after the erase:', e);
+    console.warn('Phy CE: the calculator left after the erase:', e);
     await c.close(); // cancels what is still waiting
     if (calc === c) calc = null;
     return null;

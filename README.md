@@ -1,13 +1,12 @@
-<h1 align="center">FlowCE</h1>
+<h1 align="center">Phy CE</h1>
 
 <p align="center">
-  <b>Calculus on your TI-84 Plus CE.</b><br>
-  Type math the way it looks. Get answers the way your textbook writes them, and every step to get there.
+  <b>Physics on your TI-84 Plus CE.</b><br>
+  Fill in what you know. Get the answer with its units, and every step to get there.
 </p>
 
 <p align="center">
-  <a href="https://tommyb3ll.github.io/FlowCE/"><img src="https://img.shields.io/badge/install-from_the_web-245ccc" alt="Install from the web"></a>
-  <a href="https://github.com/tommyb3ll/FlowCE/releases/latest"><img src="https://img.shields.io/github/v/release/tommyb3ll/FlowCE?label=release&color=245ccc" alt="Latest release"></a>
+  <a href="https://nothanro.github.io/PhyCE/"><img src="https://img.shields.io/badge/install-from_the_web-245ccc" alt="Install from the web"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue" alt="License: GPL-3.0"></a>
   <img src="https://img.shields.io/badge/calculator-TI--84%20Plus%20CE-2a5bd7" alt="TI-84 Plus CE">
   <img src="https://img.shields.io/badge/engine-Giac-555" alt="Engine: Giac">
@@ -15,311 +14,85 @@
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/flowce_steps.gif" alt="FlowCE: an antiderivative from the calculus menu, then enter for its steps: integration by parts, down to the answer"></td>
-    <td width="50%"><img src="docs/khicasflow.gif" alt="KhiCAS + Flow: its start screen, an integral from KhiCAS's calculus list typed in 2D over its text, a factorization, KhiCAS's algebra list, the spreadsheet"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>FlowCE</b>: exact answers, and every step to get there</td>
-    <td align="center"><b>KhiCAS + Flow</b>: KhiCAS as Bernard Parisse made it, in FlowCE's look</td>
+    <td width="50%"><img src="docs/phyce/torque.png" alt="Phy CE: the torque of a force at 20 degrees from perpendicular, step by step"></td>
+    <td width="50%"><img src="docs/phyce/beam.png" alt="Phy CE: a beam on two supports, torques then forces"></td>
   </tr>
 </table>
 
-Two apps for the TI-84 Plus CE, from one codebase:
+Phy CE is [FlowCE](https://github.com/tommyb3ll/FlowCE) made for physics: FlowCE's interface, its
+look and its steps' page, with physics problems in place of calculus. It covers rotation, torque,
+equilibrium, moment of inertia, rotational energy and angular momentum (PHY110's Chapters 8 and 9).
 
-- **FlowCE** is a computer algebra system built for Calc 1 and Calc 2. It gives exact answers
-  (`π²/6`, not `1.64493`), the decimal value right under them, and after an answer `enter` shows
-  how to get it, step by step, the way a worked example in your textbook does.
-- **KhiCAS + Flow** is Bernard Parisse's KhiCAS as he arranged it: his menus, keys and catalog,
-  the 2D editor with the line as typed under it, the spreadsheet, programs and their debugger,
-  drawn in FlowCE's look and at its speed. For KhiCAS users and for writing programs.
+**[Install from the Phy CE page](https://nothanro.github.io/PhyCE/)**: plug in the calculator,
+click Install, and follow the short calculator prompts. **Installing erases the calculator's apps
+and archived files**: back them up with TI Connect CE first.
 
-**[Install from the FlowCE page](https://tommyb3ll.github.io/FlowCE/)**: plug in the calculator,
-pick one, click Install, and follow the short calculator prompts.
+## How it works
 
-## What's new
+`F1` to `F4` open the problem cards: **motion**, **torque**, **inertia**, **energy**. A tile opens
+a form: fill in what you know (with a unit if you like: `1200_rpm`, `3_rev`, `30_cm`, `40_deg`;
+`(-)` after a number types `_`), leave out what you want, and `enter` on the last field solves it.
+After the answer, `enter` shows the steps: each one names its rule, shows the formula, then puts
+your numbers in. `F5` (**more**): unit conversions, the formula reference by topic, units, themes.
 
-- **2.4:** logs with any base: `math`, `0` (or `log`, the number, a comma, the base) draws log₂(8) as textbooks write it, with exact answers (log₄ 8 is 3/2) and steps for log equations; algebra's steps show for problems typed with `^` or `x²` (they did not); the TI-83 Premium CE's trig key offers all six functions.
-- **2.3:** the normal line and the osculating circle on the graph screen, the TI-83 Premium CE's own keys (trig, résol, frac), a start screen that flows into the app, and the installer's leftover files deleted at the first start (256 KB of archive back).
-- **KhiCAS + Flow 1.2:** the graph shows the slope m and the radius R (`X,T,θ,n`: the full equation), the Config in khicasce's order, the TI-83 Premium CE's trig key offers sin, cos, tan and their inverses, faster menus.
-- **KhiCAS + Flow 1.1:** KhiCAS's 1D command line in color (`mode` → 2D history off), the normal line and the osculating circle, the TI-83 Premium CE's keys.
-- **KhiCAS + Flow 1.0** replaces FlowCE Python: Bernard Parisse's KhiCAS as he arranged it (his menus, keys, catalog, 2D editor, spreadsheet, programs and debugger), in FlowCE's look and at its speed.
-- **2.2:** themes you can tell apart on the calculator's screen, their colors picked on a TI-84 Plus CE (2.2.1: a clean start screen).
-- **2.1:** faster: menus open in about half the time, everyday problems answer 25 to 45% sooner.
-- **2.0:** steps for algebra, Calculus → Applications, a real graph screen, nine themes, and more.
+| Card | Problems |
+|---|---|
+| motion | angular kinematics (three of Δθ, ω₀, ω, α, t give the other two), a point on a spinning object (v<sub>t</sub>, a<sub>t</sub>, a<sub>c</sub>), period and frequency |
+| torque | torque of a force (angle to r or from perpendicular), net torque, center of mass, a beam on two supports, the tipping angle of a box |
+| inertia | point masses, the parallel axis theorem, τ = Iα, a hanging mass on a heavy pulley, the Atwood machine with a heavy pulley |
+| energy | rotational kinetic energy and a torque's work, rolling down a ramp (I = kMR²), a shape change (I₁ω₁ = I₂ω₂), two disks that grab |
 
-## Which one?
-
-| | **FlowCE** | **KhiCAS + Flow** |
-|---|---|---|
-| Step-by-step solutions | calculus (derivatives, integrals, limits, sums, Taylor series) and algebra (equations, factoring, systems, inequalities) | |
-| Graphs | the graph screen: key points, pan and zoom, conics, parametric, polar, slope fields | the graph screen; small graphs kept in the history |
-| Calculus → Applications | area, volumes, arc length, surface area, average value | |
-| Statistics and probability | data, box plots, regressions, distributions, tests | KhiCAS's spreadsheet and statistics |
-| Menus and keys | FlowCE's | KhiCAS's, as Bernard Parisse arranged them (`mode` → Shortcuts lists them) |
-| Programs (the program editor, the debugger) | | yes, in Xcas syntax |
-| Themes | nine | Paper |
-| Download | [`FlowCE.b84`](https://tommyb3ll.github.io/FlowCE/files/FlowCE.b84) | [`KhiCAS-Flow.b84`](https://tommyb3ll.github.io/FlowCE/files/KhiCAS-Flow.b84) |
-
-FlowCE is the one for class. KhiCAS + Flow is Bernard Parisse's KhiCAS as he made it, drawn in
-FlowCE's look and at its speed: for KhiCAS users and for programs. It replaces FlowCE Python.
-Install one at a time.
-
-## FlowCE
-
-After an answer, press `enter`. Each step says what it does and the rule it uses (integration by
-parts, the chain rule, L'Hôpital's rule, the quadratic formula, elimination...); a part worked
-out on the side gets its own steps. `▲` and `▼` move from step to step, and `F4` shows another
-method when there is one.
-
-| | | |
-|:-:|:-:|:-:|
-| ![Steps for the integral of x sin x: integration by parts](docs/screenshots/steps_parts.png) | ![Steps for a quadratic equation: the quadratic formula](docs/screenshots/steps_quadratic.png) | ![Steps for a limit: L'Hôpital's rule](docs/screenshots/steps_limit.png) |
-| integration by parts | a quadratic, by the formula | a limit, L'Hôpital's rule |
-
-<details>
-<summary>More steps</summary>
-
-| | | |
-|:-:|:-:|:-:|
-| ![Steps for a system of equations: elimination](docs/screenshots/steps_system.png) | ![Steps for a log equation](docs/screenshots/steps_log.png) | ![Steps for an inequality: a number tested in each interval](docs/screenshots/steps_ineq.png) |
-| a system, by elimination | a log equation | an inequality |
-| ![Steps for a telescoping sum: partial fractions](docs/screenshots/steps_sum.png) | ![Steps for an absolute value equation](docs/screenshots/steps_abs.png) | ![Steps for a derivative: the chain rule](docs/screenshots/steps_deriv.png) |
-| a sum, partial fractions | an absolute value | a derivative |
-
-</details>
-
-Not every problem has steps yet: when no textbook method explains the answer, FlowCE says so. If a
-step looks wrong, please [open an issue](https://github.com/tommyb3ll/FlowCE/issues/new/choose)
-with what you typed, or post on the [Cemetech thread](https://www.cemetech.net/forum/viewtopic.php?t=21437).
-
-<table>
-  <tr>
-    <td width="33%"><img src="docs/flowce_themes.gif" alt="FlowCE in use while its theme changes: Paper, Night, Sand, Mint, Arctic, Ember, Rose, Grape, Forest"></td>
-    <td width="33%"><img src="docs/flowce_apps.gif" alt="Calculus, Applications, Area between curves: the form filled in, the area, its steps"></td>
-    <td width="33%"><img src="docs/flowce_graph.gif" alt="The graph screen: x³ − 3x typed, graphed, panned, its key points labeled, traced"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Nine themes</b></td>
-    <td align="center"><b>Calculus → Applications</b></td>
-    <td align="center"><b>The graph screen</b></td>
-  </tr>
-</table>
-
-<details>
-<summary>What 2.0 added</summary>
-
-- **Steps for algebra too.** On top of derivatives, integrals, limits, sums and Taylor series:
-  linear and quadratic equations, factoring, rational and radical equations, systems,
-  exponential, log and trig equations, inequalities, absolute values and polynomial division.
-- **Applications of calculus**, filled in like a worksheet. Area between curves, volumes by washers
-  or shells, arc length, surface area and average value each open a short form (*between y =,
-  and y =, from x =, to x =*). Leave the bounds empty and FlowCE finds where the curves meet; then
-  `enter` shows the whole setup and the integral, step by step.
-- **A real graph screen.** Arrows pan and `+` `−` zoom; trace along the curve; the key points
-  (zeros, extrema, inflections) marked and labeled, exact when you jump to one; a table; tangent
-  and normal lines and the osculating circle, areas, max and min on an interval. Equations in x and y (circles, ellipses), parametric
-  and polar curves, slope fields.
-- **Nine themes.** Paper, Night, Sand, Mint, Arctic, Ember, Rose, Grape and Forest. *more* →
-  Themes shows each one on the whole screen as you move to it.
-- **`analyze(f)`**: domain, intercepts, asymptotes, increasing and decreasing, extrema,
-  concavity and inflection points on one page.
-- **Statistics and probability** in the *more* menu: enter data, box plots, fitted curves with r²;
-  normal, t, chi-square, binomial and Poisson distributions, inverses, intervals and tests.
-- **What next?** Under an answer, `▶` offers the likely next step: factor it, solve it for 0,
-  graph it, take its derivative.
-- **Answers that read better.** Matrices drawn as matrices, long lists of solutions wrapped,
-  `F4` with long division and the completed square, an antiderivative's derivative as a check,
-  `y′` in the symbols menu for `y″ + 4y = 0` and `f′(2)`.
-
-</details>
-
-<details>
-<summary>Highlights</summary>
-
-- **Type math as it looks.** Fractions, powers, roots, integrals, sums, limits and derivatives are
-  drawn in 2D while you type. `/` makes a fraction of what is before it, `^` opens an exponent,
-  and the arrows move through the boxes in the order you read them. Commands from the menus and
-  the search come with a box for each argument, labeled with what goes in it, and a line under
-  the input says what the command does, with an example.
-- **Answers like your textbook.** `arctan((x+1)/2)`, `x − x³/6 + x⁵/120 + O(x⁶)`,
-  `C1·cos(x) + C2·sin(x)`, polynomials in descending powers, `log` meaning base 10, `+ C` on
-  antiderivatives. Press **F4** for other forms: simplified, one fraction, factored, expanded,
-  decimal. To keep answers exactly as computed, turn off *Simplify answers* in `mode`.
-- **Calculus 1, 2 and 3.** Derivatives, integrals (trig integrals, trig substitution, partial
-  fractions, arc length and surface area), improper integrals that say *diverges* when they do,
-  limits that say *does not exist* (with the left and right values), series and power series
-  sums, Taylor series, Riemann sums, differential equations with initial values, parametric and
-  polar areas, gradients, multiple integrals, complex numbers, vectors, matrices.
-- **Keys that work like a TI's.** `(-)` is a minus sign and `2nd (-)` is **Ans**. Starting a line
-  with `×`, `÷`, `+`, `−` or `^` works on the last answer (`× 2 enter` doubles it). `2nd enter`
-  brings back your last input, and `sto→` stores (`5 → b`). Keys typed while a menu opens are
-  kept, however fast you type.
-- **History and search.** **▲** walks through your past calculations; enter reuses an input or an
-  answer. **▼** searches every command, with descriptions and examples.
-- **Tested on the calculator itself.** Before a release, about 900 Calc 1–3 problems run on an
-  emulated TI-84 Plus CE and their answers are checked against a computer's, along with every
-  menu and screen. A long calculation shows *Calculating*, and **ON** stops it; one that runs out
-  of memory stops with a message instead of closing the app.
-
-</details>
-
-<details>
-<summary>Applications, graphs, statistics</summary>
-
-| | | |
-|:-:|:-:|:-:|
-| ![The form of Area between curves: between y = x + 2 and y = x², from and to where they meet](docs/screenshots/apps_form.png) | ![Area between curves, with steps](docs/screenshots/apps_area_steps.png) | ![Volume by washers, with steps](docs/screenshots/apps_washer_steps.png) |
-| Calculus → Applications: a form | find where they meet, then the area | a volume, by washers |
-| ![The graph screen: key points of x³ − 3x](docs/screenshots/graph_points.png) | ![An ellipse and a line on the graph screen](docs/screenshots/graph_conic.png) | ![A slope field](docs/screenshots/graph_field.png) |
-| the graph screen: key points | equations in x and y | a slope field |
-| ![analyze: domain, intercepts, asymptotes](docs/screenshots/analyze.png) | ![A line fitted to data](docs/screenshots/stats_fit.png) | ![The normal distribution: an area](docs/screenshots/prob_normal.png) |
-| `analyze(f)` | statistics: a fitted line | probability: the normal curve |
-| ![The row of actions under an answer](docs/screenshots/action_row.png) | ![A box plot and the five numbers](docs/screenshots/stats_box.png) | ![A t test](docs/screenshots/prob_ttest.png) |
-| `▶`: what to do next | a box plot | a t test |
-
-</details>
-
-<details>
-<summary>Themes</summary>
-
-<p align="center">
-  <img src="docs/screenshots/themes_grid.png" width="60%" alt="more, Themes: nine tiles, Paper, Night, Sand, Mint, Arctic, Ember, Rose, Grape and Forest, each in its own colors">
-</p>
-
-*more* → **Themes** opens a grid of all nine, each tile in its own colors. Moving to a tile shows
-that theme on the whole screen at once; `enter` keeps it, `clear` goes back. Paper and Night are
-FlowCE's light and dark looks; the others take after well-loved palettes (Solarized, Nord,
-Gruvbox, Rosé Pine, Dracula).
-
-</details>
+Each problem is also a command for the input line, with named values in any order:
+`torque(r=0.35,F=120,phi=40)`, `kinematics(omega0=0,omega=1200_rpm,t=2.5)`,
+`beam(s=[1,4],M=20,L=5,m=[60],x=[4.2])`. Lengths in m, masses in kg, angles turned in rad,
+angular speeds in rad/s, a force's angle in degrees, unless a unit says otherwise.
 
 <details>
 <summary>More screens</summary>
 
 | | | |
 |:-:|:-:|:-:|
-| ![An antiderivative with + C](docs/screenshots/hero_integral.png) | ![Typing a definite integral](docs/screenshots/typing_integral.png) | ![The sum of 1/n² is π²/6](docs/screenshots/basel.png) |
-| an antiderivative, with `+ C` | typing a definite integral | Σ 1/n² = π²/6 |
-| ![A power series sum](docs/screenshots/power_series.png) | ![A limit that does not exist](docs/screenshots/dne.png) | ![A Riemann sum](docs/screenshots/riemann.png) |
-| a power series: −ln(1−x) | a limit that does not exist | a Riemann sum, index i |
-| ![The integral of sec cubed](docs/screenshots/sec.png) | ![A trig substitution](docs/screenshots/trigsub.png) | ![An initial value problem](docs/screenshots/ivp.png) |
-| ∫ sec³x | a trig substitution | an initial value problem |
-| ![F4: other forms](docs/screenshots/forms.png) | ![A graph with trace](docs/screenshots/graph_sin_trace.png) | ![A polar curve](docs/screenshots/graph_polar.png) |
-| F4: other forms | trace along a graph | a polar curve |
-| ![History](docs/screenshots/history.png) | ![Command search](docs/screenshots/search.png) | ![The calculus menu](docs/screenshots/menu_calculus.png) |
-| history | command search | the calculus menu |
+| ![Kinematics](docs/phyce/kinematics.png) | ![Net torque](docs/phyce/nettorque.png) | ![Parallel axis](docs/phyce/parallelaxis.png) |
+| kinematics | net torque | parallel axis |
+| ![Pulley](docs/phyce/pulley.png) | ![Atwood machine](docs/phyce/atwood.png) | ![Rolling](docs/phyce/rolling.png) |
+| a heavy pulley | an Atwood machine | rolling down a ramp |
+| ![Disks](docs/phyce/disks.png) | ![Conversion](docs/phyce/conversion.png) | ![Reference](docs/phyce/reference.png) |
+| angular momentum | unit conversion | formula reference |
+
+These are Phy CE's own steps pages, drawn with the app's code on a computer (`tools/hostgiac -V`).
 
 </details>
-
-<details>
-<summary>Keys</summary>
-
-| Key | What it does |
-|---|---|
-| F1 to F5 | menus: algebra, calculus, trig, symbols, more (with `2nd` or `alpha`: more menus) |
-| F1 / F2 action after typing | applies to what you typed: `x^2−1` then Factor is `factor(x^2−1)` (on an empty line: the last answer) |
-| `enter` after an answer | its steps (calculus, equations, inequalities, factoring, divisions) |
-| `▶` after an answer | the row of next steps: `◀` `▶` move, `enter` does it |
-| F4 on the steps page | another method, when there is one (long or synthetic division) |
-| `math` | templates: fraction, root, integrals, derivative, limit, sum; `0`: log with any base |
-| ▲ / ▼ | history / search every command |
-| F4 on an answer | its other forms (on an antiderivative, its derivative as a check) |
-| `(-)` | a minus sign; `2nd (-)` is the last answer (Ans) |
-| `+` `−` `×` `÷` `^` `x²` first | works on the last answer, as on a TI (`× 2` is Ans·2) |
-| `2nd enter` | the last input again (ENTRY); press again for the one before |
-| `sto→` | stores a value: `5 → b` |
-| `clear` | erases the line; on an empty line, the answer |
-| ON or `clear` while computing | stops the calculation |
-| calculus menu, `0` | Applications: area, volumes, arc length, surface area, average value (FlowCE 2.0) |
-| *more* → Graph | graphs the line or the answer (FlowCE 2.0: arrows pan, `+` `−` zoom, F1 trace, F2 zoom menu, F3 key points and tools, F4 table) |
-| *more* → Themes | nine themes, shown as you move (FlowCE 2.0) |
-| *more* → Statistics, Probability | data and fitted curves, distributions and tests (FlowCE 2.0) |
-| `mode` | settings (*Simplify answers* on or off), shortcuts, about |
-| `2nd quit` | quit (your session is kept) |
-
-</details>
-
-## KhiCAS + Flow
-
-KhiCAS's screens, drawn in FlowCE's look: its F-key menus rise from the key as numbered lists, the
-2D editor is a panel at the bottom with the line as typed under it (the caret and a selection in
-both), the history reads like KhiCAS's, and the catalog, the spreadsheet, the periodic table and
-the program debugger keep KhiCAS's keys. `mode` → Shortcuts lists them; `mode` → *Arrows by
-character* makes left and right step through the typed line instead of the 2D; `mode` → *2D history*
-off gives KhiCAS's command line, the input and the history as text in KhiCAS's colors.
-
-| | |
-|:-:|:-:|
-| ![The 2D editor over the line as typed: an integral, its text with the caret](docs/screenshots/kh_editor.png) | ![KhiCAS's calculus list, rising from F2](docs/screenshots/kh_menu.png) |
-| the 2D editor, the line as typed under it | KhiCAS's menus, from the F-keys |
-| ![The spreadsheet: a column selected](docs/screenshots/kh_sheet.png) | ![The periodic table: oxygen](docs/screenshots/kh_periodic.png) |
-| the spreadsheet (`stat`) | the periodic table |
 
 ## Install
 
-**[The FlowCE page](https://tommyb3ll.github.io/FlowCE/#install) selects the installer for your OS.** Open it in Chrome
-or Edge with the calculator plugged in, pick FlowCE or KhiCAS + Flow, and click Install: it checks
-the calculator, erases its archive (after you agree), sends FlowCE and opens the installer. Press
-`enter` once on the calculator: it installs and restarts by itself. On Windows it needs
-[TI Connect CE](https://education.ti.com/en/products/computer-software/ti-connect-ce-sw) 6.1 or
-newer installed (for its USB driver).
-
-**OS 5.8.5:** the page selects **arTIfiCE v3** and guides you through Inequalz, **AsmHook2**,
-then **INST**. The page supplies and transfers all required files; there is nothing to download
-or select yourself. It prepares RAM and starts INST automatically, with two short calculator prompts in between.
-[TI Connect CE instructions](docs/install/os-5.8.5.md) are also available.
-OS **5.8.4.0058** still uses v2.1. The one-enter automatic finish above applies to the v2.1 path.
-Keep your current OS; upgrading is not necessary to use FlowCE.
-
-You need a **TI-84 Plus CE** (or TI-83 Premium CE). FlowCE fills most of the
-memory (about 2.8 MB), so installing it erases the calculator's apps and archived files: back up
-anything you want to keep first. FlowCE is a computer algebra system: follow your class and test
-rules (some tests, like the ACT, don't allow one).
-
-<details>
-<summary>By hand, with TI Connect CE</summary>
-
-**OS 5.3–5.8.4 by hand, with TI Connect CE:**
-
-1. **Clear the memory:** `2nd` `+` (MEM) → `7:Reset...` → right arrow twice to **ALL** →
-   `1:All Memory...` → `2:Reset`.
-2. **Send the bundle:** download [`FlowCE.b84`](https://tommyb3ll.github.io/FlowCE/files/FlowCE.b84)
-   or [`KhiCAS-Flow.b84`](https://tommyb3ll.github.io/FlowCE/files/KhiCAS-Flow.b84),
-   drag it onto the calculator in TI Connect CE and send it.
-3. **Run the installer:** `prgm` → `enter` → `enter` opens the arTIfiCE shell; `enter` starts
-   INST and `enter` again installs. It counts down to 0; don't touch the calculator.
-4. At *"Success! Will now reset"*, press `enter` (a few times if the screen looks odd).
-5. **Start:** `clear`, then `apps` → **FlowCE** (KhiCAS + Flow: **KhiFlow**).
-
-| 1. Clear the memory | 3. Run the installer | 5. Start FlowCE |
-|:-:|:-:|:-:|
-| ![Clearing the memory: MEM, Reset, ALL, All Memory, Reset](docs/install/install_1_reset.gif) | ![prgm, enter, enter, the arTIfiCE shell, INST, the countdown, Success](docs/install/install_3_run.gif) | ![apps, FlowCE, the start screen](docs/install/install_5_start.gif) |
-
-**If something goes wrong**
-- *The screen freezes at "Success! Will now reset":* press the reset button on the back of the
-  calculator (a pen tip or a paperclip). FlowCE stays installed.
-- *The calculator acts strangely* (menus glitch, TI Connect CE stays on "refreshing"): clear the
-  RAM: `2nd` `+` (MEM) → `7:Reset...` → `1:All RAM...` → `2:Reset`. This does not remove FlowCE.
-- *The calculator stays unresponsive:* hold the reset button for a few seconds.
-
-</details>
+From the page: Chrome or Edge, the calculator's USB cable, then **Connect calculator** and **Install**.
+With TI Connect CE: download `PhyCE.b84` from the [latest release](https://github.com/nothanro/PhyCE/releases/latest),
+clear the archive (`2nd` `+` → `7` → ▶ ARCHIVE → `3` → `2`), send the bundle, then `prgm` →
+`enter` → `enter` (arTIfiCE), `enter` (INST), `enter` to install. At "Success! Will now reset",
+`enter`, then `apps` → **PhyCE**. Phy CE and FlowCE do not both fit in the calculator's archive.
 
 ## Building
 
-FlowCE 2.3 builds with the [CE C/C++ toolchain](https://github.com/CE-Programming/toolchain)'s nightly
-release (2.2.4 and earlier: v15) plus `g++` and `python3`. Clone with `--recursive` (the engine is the
-`src/giac` submodule). `tools/dev/build.sh en-steps-v15-nightly` builds it in WSL from the working tree (`APPLANG=en STEPS=1`;
-`tools/dev/wsl_build_v15.sh` links the app and cuts it into the AppIns appvars installed by the
-INST program). KhiCAS + Flow builds with `tools/dev/build.sh en-khicas-v15-nightly` (`APPLANG=en KHICAS=1`).
-FlowCE Python 1.9.1 is the `v1.9.1-rc1` tag, built with CEdev v14.2 and `./mkappen`. `tools/emu/` drives the CEmu emulator for the regression tests, the screenshots and
-the GIFs above, and `tests/host/` holds host tests of the editor and the 2D layout.
+The workflow (`.github/workflows/phyce.yml`) builds and publishes everything on each push to `main`.
+By hand, on Linux, with the [CE C/C++ toolchain](https://github.com/CE-Programming/toolchain) v15 in
+`~/CEdev`, `g++` and `python3`, after cloning with `--recursive` (the engine is the `src/giac` submodule):
 
-The app must fit in 43 flash pages (at most 2,818,045 bytes); the build prints the room left.
+```
+ln -sf app.src1 app_tools/app.src
+APP_NAME=PhyCE APP_INFO="Phy CE - physics - GNU GPL" tools/dev/linux_build_v15.sh "$PWD" "APPLANG=en PHYS=1"
+```
+
+`PHYS=1` builds Phy CE: `src/physics.cc` (the problems, their answers and their steps) takes the
+place of FlowCE's calculus steps (`src/steps.cc`) behind the same interface. The physics letters
+(ω α τ φ Δ °) were added to the math fonts by `tools/fonts/add_math_greek.py`. The steps can be checked
+on a computer with the host build of the engine: `EXTRA_DEFS="-DWITH_UNITS -DPHYSCE" tools/hostgiac/build.sh phys`,
+then `hostgiac-phys -S -e 'torque(r=0.35,F=120,phi=40)'` (`-V dir`: the steps pages as images).
 
 ## Credits and license
 
-FlowCE, by Tommy Bell, is a fork of [KhiCAS](https://www-fourier.univ-grenoble-alpes.fr/~parisse/)
-by Bernard Parisse.
+Phy CE is a fork of [FlowCE](https://github.com/tommyb3ll/FlowCE) by Tommy Bell, itself a fork of
+[KhiCAS](https://www-fourier.univ-grenoble-alpes.fr/~parisse/) by Bernard Parisse. Not affiliated
+with FlowCE or Texas Instruments.
 
 - **Math engine:** Giac, by Bernard Parisse and contributors (Institut Fourier, Université
   Grenoble Alpes).
@@ -328,11 +101,7 @@ by Bernard Parisse.
 - **Thanks** to Adrien Bertrand, Xavier Andreani and the TI-83/84 development community,
   especially Jacob Young, commandblockguy and Matt Waltz.
 - **Installer:** [arTIfiCE](https://yvantt.github.io/arTIfiCE/) by YvanTT.
-- **Fonts:** Atkinson Hyperlegible (Braille Institute) and STIX Two, under the SIL Open Font
-  License (`tools/fonts/src`).
+- **Fonts:** Atkinson Hyperlegible, STIX Two (SIL Open Font License).
 
-FlowCE is free software under the [GNU General Public License](LICENSE), version 3 or later. It
-comes with no warranty.
-
-Parts of FlowCE 2.0 (the algebra steps, the graph screen, analyze, statistics and probability)
-were adapted from [DeltaCE](https://github.com/bupfff/DeltaCE), a GPL-3.0 fork of FlowCE.
+Free software under the GNU General Public License, version 3 or later ([LICENSE](LICENSE)), with
+no warranty. Phy CE solves problems step by step: follow your class and test rules.

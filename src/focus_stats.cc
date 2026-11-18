@@ -5,7 +5,7 @@
 // with r², and the points with the curve on the graph screen. The numbers are giac's (kmisc.cc
 // built WITH_STATS): exact when the data are (the mean of 1, 2, 3, 4 is 5/2); the quartiles the
 // TI's way (the medians of the halves, the median left out of them).
-#ifdef FLOWCE_STEPS
+#if defined FLOWCE_STEPS && !defined PHYSCE // (Phy CE: no statistics)
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>

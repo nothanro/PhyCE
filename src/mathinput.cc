@@ -64,6 +64,7 @@
 // Not reentrant: one static node pool (MAXN nodes of 16 bytes) and static state.
 
 #include "mathinput.h"
+#include <string.h>
 
 // node pool, parser nesting, display ops budget, layout recursion, construct chain
 enum { MAXN = 192, MAXD = 24, MAXOPS = 400, RMAX = 2 * MAXD + 4, MAXC = 64 };
@@ -282,6 +283,40 @@ static int dw(const char * t, int sm) { // width of a display name, upright
   while (t[n]) ++n;
   return M->wf ? M->wf(t, n, sm, MI_UP) : n * fnt(sm).adv;
 }
+
+#ifdef PHYSCE
+// Phy CE: physics names as textbooks write them: omega, alpha, tau, phi, Delta as their letters
+// (Dtheta: the angle turned), a subscript after _ or the trailing digits (omega0, tau_net, m1)
+static const char * const GK[] = {"omega", "\xcf\x89", "alpha", "\xce\xb1", "tau", "\xcf\x84", "phi", "\xcf\x86",
+  "Delta", "\xce\x94", "theta", "\xce\xb8", "Dtheta", "\xce\x94\xce\xb8", "Domega", "\xce\x94\xcf\x89",
+  "Dt", "\xce\x94" "t", "DeltaL", "\xce\x94" "L", "DeltaE", "\xce\x94" "E", 0};
+static int litw(const char * t, int sm) { // width of a name's letters, italic
+  int n = 0;
+  while (t[n]) ++n;
+  return M->wf ? M->wf(t, n, sm, MI_IT) : n * fnt(sm).adv;
+}
+static int subdy(int sm) { const mi_font & f = fnt(sm); return mx((f.asc + 2) / 4, fnt(1).asc - f.asc * 2 / 5); } // (log's base)
+// leaf n's name [c,b): its base [c,be) (lit: its letters, 0 as typed) and its subscript [sc,b)
+// (sc == b: none); 0 when the name is drawn as typed
+static int pname(int n, int c, int b, const char ** lit, int & be, int & sc) {
+  if (!(T[n].f & F_NAME) || (T[n].f & F_FN) || b - c < 2 || S[c] == '_' || inunit(c)) return 0;
+  int u = c + 1;
+  while (u < b && S[u] != '_') ++u;
+  be = u; sc = u < b - 1 ? u + 1 : b;
+  if (u >= b) { // trailing digits
+    int d = b;
+    while (d > c + 1 && S[d - 1] >= '0' && S[d - 1] <= '9') --d;
+    be = d; sc = d;
+  }
+  *lit = 0;
+  for (int i = 0; GK[i]; i += 2) {
+    int l = 0;
+    while (GK[i][l]) ++l;
+    if (l == be - c && !strncmp(S + c, GK[i], l)) { *lit = GK[i + 1]; break; }
+  }
+  return *lit || sc < b;
+}
+#endif
 
 static int pseq(int stopc);
 static int pfactor();
@@ -521,6 +556,9 @@ static int pgap(int n, int c, int adv) {
 }
 static int hidedot(int n) { // MI_F_IMPLDOT: a * before a letter or ( is implicit multiplication:
   if (!(M->flags & MI_F_IMPLDOT)) return 0; // its gap, 1 px; a thin space before a differential
+#ifdef PHYSCE
+  if (T[n].b > 0 && inunit(T[n].b - 1)) return 0; // (Phy CE) N*m as N·m, as textbooks write it
+#endif
   int j = T[n].b;                           // (2x dx) or a name of letters (x sin(x))
   while (j < L && blank(ch(j))) ++j;
   if (j >= L || (!namec(ch(j)) && ch(j) != '(')) return 0;
@@ -831,6 +869,15 @@ static void measure(int n, int sm) {
       const char * dn = dname(n);
       int uc, ue, ug;
       unitspan(n, c, d.b, sm, uc, ue, ug);
+#ifdef PHYSCE
+      const char * gl;
+      int be, sc;
+      if (!dn && pname(n, c, d.b, &gl, be, sc)) {
+        w += (gl ? litw(gl, sm) : tw(c, be - c, sm, MI_IT)) + (sc < d.b ? tw(sc, d.b - sc, 1, MI_UP) : 0);
+        if (sc < d.b) d.ds = mx(d.ds, subdy(sm) + fnt(1).desc);
+      } else if (ue - uc == 3 && uc != c && !strncmp(S + uc, "deg", 3)) w += litw("\xc2\xb0", sm); // _deg: the degree sign
+      else
+#endif
       w += dn ? dw(dn, sm) : ug + tw(uc, ue - uc, sm, style(n, k));
       w += pgap(n, c, f.adv);
       if (k == K_OP) w += 2 * M->opgap;
@@ -1055,6 +1102,19 @@ static void place(int n, int x, int y, int dp, int sm) {
         const char * dn = sy ? 0 : dname(n);
         int uc, ue, ug;
         unitspan(n, c, d.b, sm, uc, ue, ug);
+#ifdef PHYSCE
+        const char * gl;
+        int be, sc;
+        if (!sy && !dn && pname(n, c, d.b, &gl, be, sc)) { // (Phy CE) its letters, its subscript small and lowered
+          const int bw = gl ? litw(gl, sm) : tw(c, be - c, sm, MI_IT);
+          op(MI_TEXT, sm, gx, y, bw, f.asc + f.desc, c, be - c, gl, MI_IT);
+          if (sc < d.b) op(MI_TEXT, 1, gx + bw, y + subdy(sm), tw(sc, d.b - sc, 1, MI_UP), fnt(1).asc + fnt(1).desc, sc, d.b - sc, 0, MI_UP);
+          alias(c + 1, d.b);
+        } else if (!sy && !dn && ue - uc == 3 && uc != c && !strncmp(S + uc, "deg", 3)) { // _deg: the degree sign, no space
+          op(MI_TEXT, sm, gx, y, litw("\xc2\xb0", sm), f.asc + f.desc, uc, 3, "\xc2\xb0", MI_UP);
+          alias(c + 1, d.b);
+        } else
+#endif
         if ((uc != c || ue != d.b) && !sy && !dn) { // (DeltaCE) a unit: its text without the _, after a thin space
           op(MI_TEXT, sm, gx + ug, y, tw(uc, ue - uc, sm, st), f.asc + f.desc, uc, ue - uc, 0, st);
           for (p = c + 1; p < d.b; ++p)

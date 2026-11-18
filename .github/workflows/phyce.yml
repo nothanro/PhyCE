@@ -1,0 +1,74 @@
+name: Phy CE
+
+# Builds the Phy CE app (CE toolchain v15, APPLANG=en PHYS=1), bundles it as PhyCE.b84 (its AppIns
+# files, arTIfiCE and INST, as FlowCE's bundle), attaches it to the release "latest", and publishes
+# the install page (site/) on GitHub Pages with that bundle. Runs on each push to main.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: phyce
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: CE toolchain v15
+        run: curl -sL https://github.com/CE-Programming/toolchain/releases/download/v15.0/CEdev-Linux.tar.gz | tar -xzf - -C ~
+
+      - name: Build the app
+        env:
+          APP_NAME: PhyCE
+          APP_INFO: Phy CE - physics - GNU GPL
+        run: |
+          ln -sf app.src1 app_tools/app.src
+          bash tools/dev/linux_build_v15.sh "$PWD" "APPLANG=en PHYS=1"
+
+      - name: Bundle
+        run: |
+          mkdir -p out
+          ~/CEdev/bin/convbin -j 8x -k b84 $(ls bin/AppIns*.8xv | sort -V | sed 's/^/-i /') \
+            -i site/artifice-v3/arTIfiCE.8xp -i app_tools/INST.8xp -o out/PhyCE.b84
+          echo "VER=v$(sed -n 's/^#define PHYSCE_VERSION "\(.*\)".*/\1/p' src/focus.h)" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PhyCE
+          path: out/PhyCE.b84
+
+      - name: Release
+        uses: softprops/action-gh-release@5122b4edc95f85501a71628a57dc180a03ec7588
+        with:
+          tag_name: latest
+          name: Phy CE ${{ env.VER }}
+          body: "Phy CE ${{ env.VER }}: install it from the page, or send PhyCE.b84 with TI Connect CE (see the README)."
+          files: out/PhyCE.b84
+
+      - name: Page
+        run: bash site/build.sh out/PhyCE.b84 "$VER"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -2804,7 +2804,11 @@ int Console_GetKey(){
       return Console_Input((const Char*)buf);
     }
 #else
+#ifdef PHYSCE
+    if (0){ // (Phy CE: F4 is the energy card, never an answer's forms)
+#else
     if (focus_on && key==KEY_CTRL_F4 && Current_Line==Last_Line && focus_result_line()>=0){
+#endif
 #ifdef WITH_EQW
       console_cycle_form(focus_result_line());
 #endif
@@ -2843,7 +2847,13 @@ int Console_GetKey(){
       }
       if (a==FA_PLOT)
         return Console_FMenu(KEY_CTRL_F3);
-#ifdef FLOWCE_STEPS
+#ifdef PHYSCE
+      if (a==FA_REF){ // (Phy CE) a topic of the formula reference, on the steps' page
+        focus_steps(text,0);
+        Console_Disp(1);
+        continue;
+      }
+#elif defined FLOWCE_STEPS
       if (a==FA_STATS || a==FA_PROB){ // (DeltaCE) statistics, probability (focus_stats.cc)
         if (a==FA_STATS) focus_stats(); else focus_prob();
         Console_Disp(1);

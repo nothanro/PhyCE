@@ -18,6 +18,7 @@ extern "C" {
 #if defined(FLOWCE_TILOOK) || defined(FLOWCE_KHICAS)
 #define FOCUS_CONSOLE 1 // the console's layout: the history from the top, the edit line under it, no answer shown large
 #endif
+#define PHYSCE_VERSION "1.0" // Phy CE (PHYSCE): FlowCE's look for PHY110's rotation and equilibrium
 #ifdef FLOWCE_STEPS
 #define FLOWCE_VERSION "2.4" // the step-by-step build (FlowCE; the Python build is the 1.9 line)
 #elif defined FLOWCE_KHICAS
@@ -122,7 +123,7 @@ void focus_prob();                      // (DeltaCE) probability: distributions,
 int focus_graph_input(const char * in); // (DeltaCE) plot, plotparam, plotpolar, plotfield, plotode: the graph screen (focus_graph.cc); 0: not a plot, -1: one it cannot draw
 void focus_tab(int i, int on, int bank); // the standard layer's tab of F-key i (on: its menu is open)
 void focus_bar_tabs(const char * const * labels, int on); // the F-key bar as 5 text tabs, tab on selected
-enum { IC_X2, IC_INT, IC_WAVE, IC_PI, IC_FORMS, IC_MORE, IC_SEARCH };
+enum { IC_X2, IC_INT, IC_WAVE, IC_PI, IC_FORMS, IC_MORE, IC_SEARCH, IC_OMEGA, IC_TAU, IC_INERTIA, IC_ENERGY }; // (Phy CE: its tabs' letters)
 void focus_icon(int ic, int x, int cy, int bank, int c, int bg); // the prototype's icons
 // a chip (exact F4, steps enter) at x (x < 0: none drawn), text baseline cy, filled if on: its width
 int focus_chip(int bank, int x, int cy, const char * w, const char * k, int on, int bg);
@@ -130,7 +131,8 @@ int focus_chip(int bank, int x, int cy, const char * w, const char * k, int on, 
 // focus_menu.cc: F1-F5 and the math key open a popover over the dimmed stage. Returns FA_NONE
 // (closed), FA_INSERT with the template to insert (*text, then the caret back *back chars), or
 // an action for the console.
-enum { FA_NONE, FA_INSERT, FA_CATALOG, FA_PLOT, FA_FILE, FA_CLEAR, FA_GRAPH, FA_THEME, FA_STATS, FA_PROB, FA_APPS, FA_RUN };
+enum { FA_NONE, FA_INSERT, FA_CATALOG, FA_PLOT, FA_FILE, FA_CLEAR, FA_GRAPH, FA_THEME, FA_STATS, FA_PROB, FA_APPS, FA_RUN,
+       FA_CONV, FA_REFS, FA_UNITS, FA_REF }; // (Phy CE: more > Unit conversions, Formula reference, Units; FA_REF: *text a topic to show)
 // FA_RUN: *text is a calculation to run (an application's form, the calculus card's Applications),
 // which took the line typed when the menu opened (focus_form_line, set by the console)
 extern const char * focus_form_line;

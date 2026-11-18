@@ -4192,6 +4192,25 @@ void answer_after(giac::gen & g,const answer_ctx & a,std::string & msg,giac::gen
   }
 }
 
+#ifdef PHYSCE
+// (Phy CE) a problem's values: v_t=(2_(m/s)) as v_t=2_(m/s) (giac's parentheses around a value with its unit)
+static __attribute__((noinline)) void unparen_values(std::string & s){
+  std::string o;
+  for (size_t i=0;i<s.size();++i){
+    if (s[i]=='=' && i+1<s.size() && s[i+1]=='('){
+      int d=0; size_t j=i+1; bool simple=true;
+      for (;j<s.size();++j){
+        const char c=s[j];
+        if (c=='(') ++d; else if (c==')'){ if (--d==0) break; }
+        else if (d==1 && (c=='+' || c=='=' || c==',' || (c=='-' && j>i+2))) simple=false;
+      }
+      if (j<s.size() && simple){ o+='='; o.append(s,i+2,j-i-2); i=j; continue; }
+    }
+    o+=s[i];
+  }
+  s=o;
+}
+#endif
 #ifdef WITH_UNITS
 // (DeltaCE) a result's units as textbooks write them, still giac's syntax (the history is typed
 // again): 120.0_mn is 120_min, 200.0_(cm) 200_cm, 0.555556_(m*s^-1) 0.555556_(m/s), 2.0e-5_km 2e-5_km
@@ -4270,6 +4289,9 @@ std::string answer_print(const giac::gen & g,const giac::gen & graw,const answer
 #ifdef WITH_UNITS
   if (printed.find('_')!=std::string::npos)
     units_text(printed);
+#endif
+#ifdef PHYSCE
+  if (printed.find("=(")!=std::string::npos) unparen_values(printed);
 #endif
   return printed;
 }

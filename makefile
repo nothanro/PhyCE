@@ -17,6 +17,7 @@ APPLANG ?= en
 VARIANT ?= normal
 UNITS ?= 0
 STEPS ?= 0
+PHYS ?= 0
 TILOOK ?= 0
 KHICAS ?= 0
 
@@ -38,7 +39,11 @@ endif
 # DeltaCE has giac's statistics (mean, median, quartiles, standard deviation, correlation,
 # regressions: WITH_STATS, kmisc.cc) without the spreadsheet they came with (WITH_SHEET); its graph
 # screen draws the data (2026-10-18)
-ifeq ($(STEPS),1)
+# Phy CE (PHYS=1): FlowCE's steps build with physics (src/physics.cc) in place of calculus: its steps'
+# interface and page, no statistics, units on (the problems' answers carry them)
+ifeq ($(PHYS),1)
+    FEATURE_DEFS += -DFLOWCE_STEPS -DPHYSCE -DWITH_UNITS
+else ifeq ($(STEPS),1)
     FEATURE_DEFS += -DFLOWCE_STEPS -DWITH_STATS
 else ifeq ($(KHICAS),1)
     # KhiCAS's applications back: the spreadsheet and its statistics, the variation tables, units
@@ -128,6 +133,10 @@ CPP_EXTENSION = cc
 APP_NAME = FlowCE
 APP_VERSION = 5.0.0.0000
 DESCRIPTION = FlowCE - calculus CAS - GNU GPL
+ifeq ($(PHYS),1) # (Phy CE: its own name in the APPS menu; the v15 packer's too: APP_NAME, APP_INFO)
+APP_NAME = PhyCE
+DESCRIPTION = Phy CE - physics - GNU GPL
+endif
 ifeq ($(KHICAS),1) # (KhiCAS + Flow: its own name in the APPS menu; the v15 packer's too)
 APP_NAME = KhiFlow
 DESCRIPTION = KhiCAS + Flow - CAS - GNU GPL

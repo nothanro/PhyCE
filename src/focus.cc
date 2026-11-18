@@ -1205,11 +1205,19 @@ static void status_draw(int force) {
       x += ui_text(&ui_tb9, "KhiCAS+", x, 12, UC_HEADSUB, UC_HEAD, 0);
       ui_text(&ui_tb9, "Flow", x, 12, UC_HEADINK, UC_HEAD, 0);
 #else
+#ifdef PHYSCE
+      const int vw = ui_text_width(&ui_tr9, "v" PHYSCE_VERSION, -1) + 3;
+      int x = UI_W - 30 - vw - ui_text_width(&ui_tb9, "PhyCE", -1);
+      x += ui_text(&ui_tb9, "Phy", x, 12, UC_HEADSUB, UC_HEAD, 0);
+      x += ui_text(&ui_tb9, "CE", x, 12, UC_HEADINK, UC_HEAD, 0);
+      ui_text(&ui_tr9, "v" PHYSCE_VERSION, x + 3, 12, UC_HEADSUB, UC_HEAD, 0);
+#else
       const int vw = ui_text_width(&ui_tr9, "v" FLOWCE_VERSION, -1) + 3;
       int x = UI_W - 30 - vw - ui_text_width(&ui_tb9, "FlowCE", -1);
       x += ui_text(&ui_tb9, "Flow", x, 12, UC_HEADSUB, UC_HEAD, 0);
       x += ui_text(&ui_tb9, "CE", x, 12, UC_HEADINK, UC_HEAD, 0);
       ui_text(&ui_tr9, "v" FLOWCE_VERSION, x + 3, 12, UC_HEADSUB, UC_HEAD, 0);
+#endif
 #endif
     }
     int bx = UI_W - 24; // battery
@@ -1289,6 +1297,14 @@ void focus_icon(int ic, int x, int cy, int bank, int c, int bg) {
     const ui_glyph * g = ui_glyph_of(&ui_mu17, 0x3c0);
     if (g) ui_draw_glyph(&ui_mu17, 0x3c0, x - g->adv / 2, cy + 5, r, 0);
   } break;
+#ifdef PHYSCE
+  case IC_OMEGA: case IC_TAU: case IC_INERTIA: case IC_ENERGY: { // (Phy CE) the tab's letter in the math font
+    static const unsigned short cp[4] = {0x3c9, 0x3c4, 'I', 'K'};
+    const ui_face * mf = &ui_mi17;
+    const ui_glyph * g = ui_glyph_of(mf, cp[ic - IC_OMEGA]);
+    if (g) ui_draw_glyph(mf, cp[ic - IC_OMEGA], x - g->adv / 2, cy + 5, r, 0);
+  } break;
+#endif
   case IC_FORMS: {
     int a[] = {P16(2, 5.5), P16(13, 5.5), P16(10.5, 3)}, b[] = {P16(14, 10.5), P16(3, 10.5), P16(5.5, 13)};
     ui_poly16(a, 3, th, r); ui_poly16(b, 3, th, r);
@@ -1320,9 +1336,17 @@ int focus_chip(int bank, int x, int cy, const char * w, const char * k, int on, 
   return wd;
 }
 static int forms_key(); // F4 shows forms (a result is selected, or shown large)
+#ifdef PHYSCE
+static const char * const tab_word[5] = {"motion", "torque", "inertia", "energy", "more"};
+#else
 static const char * const tab_word[5] = {"algebra", "calculus", "trig", "symbols", "more"};
+#endif
 enum { LB = SB == 30 ? 12 : 15 }; // the labels' baseline under SBOT (TI look: the small font's)
+#ifdef PHYSCE
+static const unsigned char tab_icon[5] = {IC_OMEGA, IC_TAU, IC_INERTIA, IC_ENERGY, IC_MORE};
+#else
 static const unsigned char tab_icon[5] = {IC_X2, IC_INT, IC_WAVE, IC_PI, IC_MORE};
+#endif
 
 // (DeltaCE) an open tab: the card above it (focus_tab_card) and the tab are one shape, their rim
 // and hairline going around both, rounded inward where they meet; at the card's side the card's
@@ -1822,7 +1846,11 @@ int focus_result_line() {
   if (cl >= 0 && cl < Last_Line && Line[cl].type == LINE_TYPE_OUTPUT) return cl;
   return fresh() && NE ? E[NE - 1].out : -1;
 }
+#ifdef PHYSCE
+static int forms_key() { return 0; } // (Phy CE: F4 is always the energy card)
+#else
 static int forms_key() { return focus_result_line() >= 0; }
+#endif
 #ifdef FLOWCE_STEPS
 const char * focus_steps_input(const char ** ans) {
   const char * s = fresh() && NE ? steps_input(E[NE - 1]) : 0;

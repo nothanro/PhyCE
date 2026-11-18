@@ -277,7 +277,14 @@ int focus_steps_able(const char * s, const char * ans) {
   free(t);
   return r;
 }
+#ifdef PHYSCE
+int phys_problem(const char * s); // physics.cc: a physics problem's call (its steps)
+#endif
 static int steps_able(const char * s, const char * ans) {
+#ifdef PHYSCE // (Phy CE: steps for the physics problems only)
+  while (*s == ' ') ++s;
+  return phys_problem(s);
+#endif
   if (strstr(s, "desolve(")) return 0; // (its diff(y,x) is the equation, not a derivative to work out)
   if (starts(s, "implicitdiff(")) return 1;
   if (!starts(s, "solve(") && strlen(s) < 200 && relation(s)) { // as solve(...)
@@ -567,7 +574,12 @@ static __attribute__((noinline)) void lay_steps(const char * head, const std::ve
     if (*title || (d < prevd && last[d])) { // a part: a step, or back to the one a part was for
       finish(k0);
       char lb[24];
+#ifdef PHYSCE
+      extern int phys_ref; // physics.cc: the formula reference
+      strcpy(lb, *title ? (phys_ref ? "FORMULA " : "STEP ") : "BACK TO STEP ");
+#else
       strcpy(lb, *title ? "STEP " : "BACK TO STEP ");
+#endif
       digits(lb + strlen(lb), *title ? (last[d] = ++num) : last[d]);
       k0 = NP;
       section(lb, !*title, y);

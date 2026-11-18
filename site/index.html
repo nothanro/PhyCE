@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FlowCE: calculus on your TI-84 Plus CE</title>
-<meta name="description" content="A free computer algebra system for the TI-84 Plus CE: exact answers in textbook form, step-by-step solutions for calculus and algebra, a graph screen, the applications of calculus, statistics and nine themes. Install it from this page.">
-<meta property="og:title" content="FlowCE 2.2.1: calculus on your TI-84 Plus CE">
-<meta property="og:description" content="Exact answers in textbook form and every step to get there, a new graph screen, the applications of calculus, statistics and nine themes. Free and open source.">
-<meta property="og:image" content="media/screenshots/steps_parts.png">
+<title>Phy CE: physics on your TI-84 Plus CE</title>
+<meta name="description" content="Physics problems with every step, for the TI-84 Plus CE: rotation, torque, equilibrium, moment of inertia, rolling energy and angular momentum, as forms you fill in. Answers with units, the formula reference by topic, unit conversions. Install it from this page.">
+<meta property="og:title" content="Phy CE 1.0: physics on your TI-84 Plus CE">
+<meta property="og:description" content="Fill in what you know, get the answer with its units and every step to get there. Rotation, torque, equilibrium, inertia, energy and angular momentum. Free and open source.">
+<meta property="og:image" content="media/screenshots/torque.png">
 <link rel="icon" href="media/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,13 +18,12 @@
 
 <header class="top">
   <div class="wrap top-in">
-    <a class="wordmark" href="#">Flow<span>CE</span></a>
+    <a class="wordmark" href="#">Phy<span>CE</span></a>
     <nav>
       <a href="#new">What's new</a>
       <a href="#install">Install</a>
       <a href="#screens">Screens</a>
-      <a href="#chat" hidden>Live chat</a>
-      <a href="https://github.com/tommyb3ll/FlowCE">GitHub</a>
+      <a href="https://github.com/nothanro/PhyCE">GitHub</a>
     </nav>
   </div>
 </header>
@@ -32,20 +31,11 @@
 <main>
 <section class="hero wrap">
   <div class="hero-text">
-    <a class="pill" href="#new">New: FlowCE 2.4, KhiCAS + Flow 1.2</a>
-    <div class="show-pick" role="group" aria-label="Show">
-      <button type="button" class="on" data-show="flowce" aria-pressed="true">FlowCE</button>
-      <button type="button" data-show="khicas" aria-pressed="false">KhiCAS + Flow</button>
-    </div>
-    <div class="show" data-app="flowce">
-      <h1><span class="wordmark big">Flow<span>CE</span></span></h1>
-      <p class="lead">Calculus on your TI-84 Plus CE.</p>
-      <p>Type math the way it looks. Get exact answers the way your textbook writes them, and every step to get there.</p>
-    </div>
-    <div class="show" data-app="khicas" hidden>
-      <h1><span class="wordmark big long">KhiCAS + <span>Flow</span></span></h1>
-      <p class="lead">KhiCAS, as Bernard Parisse made it.</p>
-      <p>His menus, keys and catalog, the 2D editor with the line as typed under it, the spreadsheet and programs, drawn in FlowCE's look and at its speed.</p>
+    <a class="pill" href="#new">New: Phy CE 1.0</a>
+    <div class="show" data-app="phyce">
+      <h1><span class="wordmark big">Phy<span>CE</span></span></h1>
+      <p class="lead">Physics on your TI-84 Plus CE.</p>
+      <p>Fill in what you know. Get the answer with its units, and every step to get there, the way a worked example in your textbook does.</p>
     </div>
     <div class="cta">
       <a class="btn primary" href="#install" id="hero-install">Install</a>
@@ -53,14 +43,8 @@
     </div>
     <p class="fine">Free and open source. For the TI-84 Plus CE and TI-83 Premium CE.</p>
   </div>
-  <figure class="screen hero-screen show" data-app="khicas" hidden>
-    <img src="media/khicasflow.gif" width="640" height="480" alt="KhiCAS + Flow on the calculator: its start screen, an integral from KhiCAS's calculus list typed in 2D over its text, a factorization, KhiCAS's algebra list, the spreadsheet">
-  </figure>
-  <figure class="screen hero-screen show" data-app="flowce">
-    <picture>
-      <source srcset="media/flowce_dark.gif" media="(prefers-color-scheme: dark)">
-      <img src="media/flowce_light.gif" width="640" height="480" alt="FlowCE on the calculator: a definite integral typed in 2D, the sum of 1/n² giving π²/6, other forms of an answer, and a graph with trace">
-    </picture>
+  <figure class="screen hero-screen show" data-app="phyce">
+    <img src="media/screenshots/torque.png" width="640" height="480" alt="Phy CE's steps for a torque: the angle between r and F, then tau = r F sin(phi) = 0.35 times 120 times sin(70 degrees) = 39.47 N m">
   </figure>
 </section>
 
@@ -69,37 +53,31 @@
   <summary>
     <span class="wn-text">
       <h2>What's new</h2>
-      <span class="wn-sub">FlowCE 2.4: logs with any base, as textbooks write them (the math key, then 0), with exact answers; algebra's steps for problems typed with ^ or x². KhiCAS + Flow 1.2: the slope and the radius of curvature on the graph, and faster menus. FlowCE 2.3: the normal line and the osculating circle on the graph screen, and the TI-83 Premium CE's own keys. KhiCAS + Flow takes FlowCE Python's place: Bernard Parisse's KhiCAS in FlowCE's look. In FlowCE: steps for algebra as well as calculus, a real graph screen, the applications of calculus as forms you fill in, statistics, probability, nine themes you can tell apart on the calculator, and faster menus and answers.</span>
+      <span class="wn-sub">Phy CE 1.0: FlowCE's look and its steps' page, made for physics. Seventeen kinds of problems in rotation, torque, equilibrium, moment of inertia, energy and angular momentum, each a form you fill in; answers with their units; ω, α, τ, φ and Δθ written as textbooks write them; the formula reference by topic; unit conversions for rpm, revolutions and degrees.</span>
     </span>
     <span class="wn-more"><span class="wn-open">See what's new</span><span class="wn-close">Hide</span></span>
   </summary>
   <div class="wn-body">
   <div class="feat">
     <figure>
-      <img class="gif" src="media/flowce_themes.gif" loading="lazy" width="640" height="480" alt="FlowCE in use while its theme changes: Paper, Night, Sand, Mint, Arctic, Ember, Rose, Grape and Forest">
-      <figcaption><strong>Nine themes</strong>Paper, Night, Sand, Mint, Arctic, Ember, Rose, Grape, Forest: <em>more</em> &rarr; Themes shows each one on the whole screen as you move to it.</figcaption>
+      <img class="gif" src="media/screenshots/beam.png" loading="lazy" width="640" height="480" alt="A beam in equilibrium: torques about the first support, then the forces">
+      <figcaption><strong>Every step</strong>Each step names the rule it uses and the formula, then puts your numbers in: torques about a support, forces up and down, the support forces.</figcaption>
     </figure>
     <figure>
-      <img class="gif" src="media/flowce_apps.gif" loading="lazy" width="640" height="480" alt="Calculus, Applications, Area between curves: the form filled in, the area, its steps">
-      <figcaption><strong>Applications of calculus</strong>Area, volumes by washers or shells, arc length, surface area, average value: fill in the curves, FlowCE finds where they meet and shows every step.</figcaption>
+      <img class="gif" src="media/screenshots/pulley.png" loading="lazy" width="640" height="480" alt="A pulley with a hanging mass: a = m g over m plus half of M, 4.9 meters per second squared">
+      <figcaption><strong>Forms you fill in</strong>Pick a problem from <em>motion</em>, <em>torque</em>, <em>inertia</em> or <em>energy</em>, type what you know, leave out what you want: Phy CE picks the equation.</figcaption>
     </figure>
     <figure>
-      <img class="gif" src="media/flowce_graph.gif" loading="lazy" width="640" height="480" alt="The graph screen: x cubed minus 3x typed, graphed, panned, its key points labeled, traced">
-      <figcaption><strong>A new graph screen</strong>Pan with the arrows, zoom, trace; the zeros, extrema and inflections marked, exact when you jump to one. Conics, parametric and polar curves, slope fields.</figcaption>
+      <img class="gif" src="media/screenshots/reference.png" loading="lazy" width="640" height="480" alt="The formula reference: moments of inertia of a hoop, a disk, a sphere and a rod">
+      <figcaption><strong>The formula reference</strong><em>more</em> &rarr; Formula reference: each topic's formulas, and when to use each one.</figcaption>
     </figure>
   </div>
   <ul class="news">
-    <li><strong>2.3:</strong> the normal line and the osculating circle on the graph screen, the TI-83 Premium CE's own keys (trig, résol, frac), a start screen that flows into the app, and the installer's leftover files deleted at the first start (256 KB of archive back).</li>
-    <li><strong>KhiCAS + Flow 1.2:</strong> the graph shows the slope m and the radius R (<em>X,T,&theta;,n</em>: the full equation), the Config in khicasce's order, the TI-83 Premium CE's trig key offers sin, cos, tan and their inverses, faster menus.</li>
-    <li><strong>KhiCAS + Flow 1.1:</strong> KhiCAS's 1D command line in color (<em>mode</em> &rarr; 2D history off), the normal line and the osculating circle, the TI-83 Premium CE's keys.</li>
-    <li><strong>KhiCAS + Flow 1.0</strong> replaces FlowCE Python: Bernard Parisse's KhiCAS as he arranged it (his menus, keys, catalog, 2D editor, spreadsheet, programs and debugger), in FlowCE's look and at its speed.</li>
-    <li><strong>2.2, themes:</strong> Sand, Mint, Rose, Arctic, Ember, Grape and Forest have stronger colors, picked on a calculator, so its screen no longer shows several of them alike. Paper and Night are unchanged.</li>
-    <li><strong>2.1 is faster:</strong> menus open in about half the time, everyday problems answer 25 to 45% sooner, the steps pages scroll twice as fast, and the probability page keeps up with the arrows. Same answers as 2.0.</li>
-    <li><strong>Steps for algebra:</strong> equations by the formula, factoring, systems, logs and exponentials, trig equations, inequalities, absolute values, polynomial division.</li>
-    <li><strong><code>analyze(f)</code>:</strong> domain, intercepts, asymptotes, extrema, concavity and inflections on one page.</li>
-    <li><strong>Statistics and probability:</strong> data, box plots, fitted curves with r&sup2;, normal, t, chi-square, binomial and Poisson distributions, intervals and tests.</li>
-    <li><strong>What next?</strong> Under an answer, <kbd>&#9654;</kbd> offers the likely next step: factor, solve for 0, graph, differentiate.</li>
-    <li><strong>Answers that read better:</strong> matrices drawn as matrices, long lists wrapped, the completed square and long division in <kbd>F4</kbd>, an antiderivative checked by its derivative.</li>
+    <li><strong>Motion:</strong> angular kinematics (three of Δθ, ω₀, ω, α and t give the other two, by the equation without the one you don't need), a point on a spinning object (v<sub>t</sub>, a<sub>t</sub>, a<sub>c</sub>), period and frequency.</li>
+    <li><strong>Torque:</strong> the torque of a force, with its angle to r or from the perpendicular; net torque, counterclockwise positive; the center of mass; a beam on two supports; the angle where a box tips.</li>
+    <li><strong>Inertia:</strong> point masses, the parallel axis theorem, τ = Iα, a hanging mass on a heavy pulley, the Atwood machine with a heavy pulley.</li>
+    <li><strong>Energy:</strong> rotational kinetic energy and the work of a torque, rolling down a ramp (a sphere, a disk, a hoop or any I = kMR²), a shape change (I₁ω₁ = I₂ω₂), two disks that grab.</li>
+    <li><strong>Units:</strong> type a value with its unit (1200_rpm, 3_rev, 30_cm, 40_deg) and Phy CE converts it; every answer carries its unit. <em>more</em> &rarr; Unit conversions shows a conversion step by step.</li>
   </ul>
   </div>
  </details>
@@ -111,13 +89,8 @@
   <div class="pick" role="radiogroup" aria-label="Version to install">
     <label class="opt">
       <input type="radio" name="build" value="normal" checked>
-      <span class="opt-head"><strong>FlowCE</strong> <span class="ver" data-ver="normal"></span></span>
-      <span class="opt-text">Exact answers with worked steps for calculus and algebra, graphs, statistics and the Applications menu.</span>
-    </label>
-    <label class="opt">
-      <input type="radio" name="build" value="khicas">
-      <span class="opt-head"><strong>KhiCAS + Flow</strong> <span class="ver" data-ver="khicas"></span></span>
-      <span class="opt-text">Bernard Parisse's KhiCAS as he arranged it: his menus, keys and catalog, the spreadsheet, programs and their debugger, drawn in FlowCE's look. Exact answers and graphs, no steps.</span>
+      <span class="opt-head"><strong>Phy CE</strong> <span class="ver" data-ver="normal"></span></span>
+      <span class="opt-text">Physics problems with worked steps: rotation, torque, equilibrium, moment of inertia, energy and angular momentum, with units.</span>
     </label>
   </div>
 
@@ -147,7 +120,7 @@
           <div id="erase-part">
             <label class="confirm"><input type="checkbox" id="erase-ok"> <span id="erase-label">Erase all apps and archived files on my calculator</span></label>
           </div>
-          <button class="btn primary" id="btn-install" disabled>Install FlowCE</button>
+          <button class="btn primary" id="btn-install" disabled>Install Phy CE</button>
           <button class="btn primary" id="btn-reconnect" hidden>Reconnect calculator</button>
           <button class="btn primary" id="btn-delete-apps" hidden>Delete the language apps and continue</button>
           <div class="progress" id="progress" hidden><div class="bar"><span id="bar"></span></div></div>
@@ -156,17 +129,16 @@
             <div class="status" id="st-v3" aria-live="polite"></div>
             <button class="btn primary" id="btn-v3-next">Continue</button>
           </div>
-          <p class="fine">Sends <span id="version">FlowCE</span>.</p>
+          <p class="fine">Sends <span id="version">Phy CE</span>.</p>
         </div>
       </li>
 
       <li class="step" data-step="finish">
         <div class="step-head"><span class="num">3</span><h3>Finish on the calculator</h3></div>
         <div class="step-body">
-          <p id="finish-intro">When it shows <strong>INST</strong>, press <kbd>enter</kbd> once. It installs and restarts by itself (<em>"RAM Cleared"</em>). Then <kbd>apps</kbd> → <strong class="app">FlowCE</strong>.</p>
+          <p id="finish-intro">When it shows <strong>INST</strong>, press <kbd>enter</kbd> once. It installs and restarts by itself (<em>"RAM Cleared"</em>). Then <kbd>apps</kbd> → <strong class="app">PhyCE</strong>.</p>
           <div class="status" id="st-finish" aria-live="polite"></div>
-          <img class="gif" id="install-gif" src="media/install/install_web.gif" loading="lazy" width="640" height="544" alt="The arTIfiCE shell with INST, enter, the countdown, RAM Cleared, then apps and FlowCE">
-          <button class="btn" id="btn-finished" hidden><span class="app">FlowCE</span> opened successfully</button>
+          <button class="btn" id="btn-finished" hidden><span class="app">PhyCE</span> opened successfully</button>
         </div>
       </li>
     </ol>
@@ -176,15 +148,15 @@
     <summary>Install with TI Connect CE: OS 5.3–5.8.4</summary>
     <ol>
       <li>Clear the archive: <kbd>2nd</kbd> <kbd>+</kbd> (MEM) → <kbd>7</kbd> → ▶ <strong>ARCHIVE</strong> → <kbd>3</kbd> → <kbd>2</kbd>.</li>
-      <li>Download <a id="dl" href="files/FlowCE.b84" download>FlowCE.b84</a> and send it with <a href="https://education.ti.com/en/products/computer-software/ti-connect-ce-sw">TI Connect CE</a>.</li>
+      <li>Download <a id="dl" href="files/PhyCE.b84" download>PhyCE.b84</a> and send it with <a href="https://education.ti.com/en/products/computer-software/ti-connect-ce-sw">TI Connect CE</a>.</li>
       <li><kbd>prgm</kbd> → <kbd>enter</kbd> → <kbd>enter</kbd> opens arTIfiCE. <kbd>enter</kbd> starts INST, <kbd>enter</kbd> again installs.</li>
-      <li>At <em>"Success! Will now reset"</em>, press <kbd>enter</kbd>. Then <kbd>clear</kbd>, <kbd>apps</kbd> → <strong class="app">FlowCE</strong>.</li>
+      <li>At <em>"Success! Will now reset"</em>, press <kbd>enter</kbd>. Then <kbd>clear</kbd>, <kbd>apps</kbd> → <strong class="app">PhyCE</strong>.</li>
     </ol>
   </details>
 
   <details class="manual" id="os-help">
     <summary>“Unknown OS version”, or updating the calculator</summary>
-    <p>If INST shows “Unknown OS version”, reload this page and try its updated installer. If it still fails, <a href="https://github.com/tommyb3ll/FlowCE/issues/new/choose">report your model, OS and boot-code versions</a>. Newer boot code still needs verification; upgrading the OS is not a confirmed fix. If FlowCE already works, keep your OS.</p>
+    <p>If INST shows “Unknown OS version”, reload this page and try its updated installer. If it still fails, <a href="https://github.com/nothanro/PhyCE/issues">report your model, OS and boot-code versions</a>. Newer boot code still needs verification; upgrading the OS is not a confirmed fix. If Phy CE already works, keep your OS.</p>
     <p>If you choose to update, TI currently offers OS 5.8.5. <strong>TI says you cannot downgrade afterward.</strong></p>
     <ol>
       <li>Back up the calculator's files to your computer with <a href="https://education.ti.com/en/products/computer-software/ti-connect-ce-sw">TI Connect CE</a>.</li>
@@ -196,16 +168,16 @@
 
   <details class="manual" id="manual-585">
     <summary>Install on OS 5.8.5 with TI Connect CE</summary>
-    <p>Back up your files first. FlowCE replaces the other apps. Keep your current OS; upgrading isn't needed to use FlowCE.</p>
+    <p>Back up your files first. Phy CE replaces the other apps. Keep your current OS; upgrading isn't needed to use Phy CE.</p>
     <ol>
       <li>Clear the archive before starting: <kbd>2nd</kbd> <kbd>+</kbd> → <kbd>7</kbd> → ▶ <strong>ARCHIVE</strong> → <kbd>3</kbd> → <kbd>2</kbd>.</li>
       <li>Follow the <a href="https://yvantt.github.io/arTIfiCE/">official arTIfiCE v3 instructions for OS 5.8.5</a>: install Inequalz, reset RAM, send <code>arTIfiCE.8xp</code> to RAM, open Inequalz's Functions screen, then send <code>INEQUVAR.8xv</code>. After the restart, press <kbd>on</kbd> if the screen stays black.</li>
       <li><kbd>apps</kbd> → <strong>AsmHook2</strong>. Dismiss “Installation successful!” to return to the home screen.</li>
-      <li>Download the version selected above: <a href="files/FlowCE.b84" download data-goatcounter-click="download-normal" data-goatcounter-title="Download (FlowCE)">FlowCE</a> or <a href="files/KhiCAS-Flow.b84" download data-goatcounter-click="download-khicas" data-goatcounter-title="Download (KhiCAS + Flow)">KhiCAS + Flow</a>. Send the bundle with TI Connect CE. Keep <strong>INST in RAM</strong> and <strong>AppIns files in Archive</strong>. Keep AsmHook2 until you run INST; do not reset or erase again between these steps.</li>
+      <li>Download <a href="files/PhyCE.b84" download>Phy CE</a>. Send the bundle with TI Connect CE. Keep <strong>INST in RAM</strong> and <strong>AppIns files in Archive</strong>. Keep AsmHook2 until you run INST; do not reset or erase again between these steps.</li>
       <li><kbd>prgm</kbd> → select <strong>INST by name</strong> → <kbd>enter</kbd> → <kbd>enter</kbd>. Ignore the bundle's program A; it is for older OS versions. Press <kbd>enter</kbd> at the install prompt, then wait for the countdown to finish.</li>
-      <li>At “Success! Will now reset”, press <kbd>enter</kbd>. After “RAM Cleared”, <kbd>clear</kbd>, then <kbd>apps</kbd> → <strong class="app">FlowCE</strong>.</li>
+      <li>At “Success! Will now reset”, press <kbd>enter</kbd>. After “RAM Cleared”, <kbd>clear</kbd>, then <kbd>apps</kbd> → <strong class="app">PhyCE</strong>.</li>
     </ol>
-    <p class="fine">Verified in CEmu on OS 5.8.5.0074 with boot code 5.6.1.0006. Calculators with newer boot code still need verification. If INST says “Unknown OS version”, report your model, OS and boot-code versions.</p>
+    <p class="fine">FlowCE's installer, verified in CEmu on OS 5.8.5.0074 with boot code 5.6.1.0006. Calculators with newer boot code still need verification. If INST says “Unknown OS version”, report your model, OS and boot-code versions.</p>
   </details>
 
   <details class="manual">
@@ -215,77 +187,49 @@
       <li><strong>Connect fails on a Mac or Chromebook:</strong> close TI Connect CE, then unplug and replug.</li>
       <li><strong>Linux:</strong> add a udev rule such as <code>SUBSYSTEM=="usb", ATTRS{idVendor}=="0451", ATTRS{idProduct}=="e008", TAG+="uaccess"</code> in <code>/etc/udev/rules.d/69-ti-calc.rules</code>, then replug.</li>
       <li><strong>Still not enough memory after the erase:</strong> TI's language apps survive it. The page offers to delete them (<strong>Delete the language apps and continue</strong>); by hand: <kbd>2nd</kbd> <kbd>+</kbd> → <kbd>2</kbd> → Apps, <kbd>del</kbd> on each.</li>
-      <li><strong>"RAM Cleared" but this page still waits:</strong> it is installed. Press <kbd>apps</kbd> → <strong class="app">FlowCE</strong>.</li>
-      <li><strong>Frozen at "Success! Will now reset":</strong> press the reset button on the back (a pen tip). FlowCE stays installed.</li>
-      <li><strong>The calculator acts strangely:</strong> clear the RAM: <kbd>2nd</kbd> <kbd>+</kbd> → <kbd>7</kbd> → <kbd>1</kbd> → <kbd>2</kbd>. FlowCE stays installed.</li>
+      <li><strong>"RAM Cleared" but this page still waits:</strong> it is installed. Press <kbd>apps</kbd> → <strong class="app">PhyCE</strong>.</li>
+      <li><strong>Frozen at "Success! Will now reset":</strong> press the reset button on the back (a pen tip). Phy CE stays installed.</li>
+      <li><strong>The calculator acts strangely:</strong> clear the RAM: <kbd>2nd</kbd> <kbd>+</kbd> → <kbd>7</kbd> → <kbd>1</kbd> → <kbd>2</kbd>. Phy CE stays installed.</li>
       <li><strong>OS 5.8.5:</strong> the page selects v3. Follow its calculator prompts, or use <a href="#manual-585">TI Connect CE</a>. OS 5.8.4.0058 uses v2.1.</li>
       <li><strong>INST says “Unknown OS version”:</strong> see <a href="#os-help">OS help and update instructions</a>. Updating is not a confirmed fix for newer boot code.</li>
     </ul>
-    <p class="fine">Something else, or a wrong answer? <a href="https://github.com/tommyb3ll/FlowCE/issues/new/choose">Report it on GitHub</a> or on the <a href="https://www.cemetech.net/forum/viewtopic.php?t=21437">Cemetech thread</a>.</p>
+    <p class="fine">Something else, or a wrong answer? <a href="https://github.com/nothanro/PhyCE/issues">Report it on GitHub</a>.</p>
   </details>
 </section>
 
 <section id="screens" class="wrap">
   <h2>Screens</h2>
   <div class="gallery">
-    <figure><img src="media/screenshots/steps_parts.png" loading="lazy" width="640" height="480" alt="Steps for the integral of x sin x: integration by parts"><figcaption>steps: integration by parts</figcaption></figure>
-    <figure><img src="media/screenshots/steps_quadratic.png" loading="lazy" width="640" height="480" alt="Steps for a quadratic equation: a, b and c, then the quadratic formula"><figcaption>steps: an equation</figcaption></figure>
-    <figure><img src="media/screenshots/steps_log.png" loading="lazy" width="640" height="480" alt="Steps for a log equation: the product rule of logs"><figcaption>steps: a log equation</figcaption></figure>
-    <figure><img src="media/screenshots/apps_form.png" loading="lazy" width="640" height="480" alt="The form of Area between curves: between y = x + 2 and y = x squared"><figcaption>applications: a form</figcaption></figure>
-    <figure><img src="media/screenshots/apps_washer_steps.png" loading="lazy" width="640" height="480" alt="Steps for a volume by washers"><figcaption>a volume, by washers</figcaption></figure>
-    <figure><img src="media/screenshots/basel.png" loading="lazy" width="640" height="480" alt="The sum of 1 over n squared equals pi squared over 6"><figcaption>exact answers: π²/6</figcaption></figure>
-    <figure><img src="media/screenshots/graph_points.png" loading="lazy" width="640" height="480" alt="The graph of x cubed minus 3x with its key points labeled"><figcaption>graphs: key points</figcaption></figure>
-    <figure><img src="media/screenshots/graph_conic.png" loading="lazy" width="640" height="480" alt="An ellipse and a line on the graph screen"><figcaption>equations in x and y</figcaption></figure>
-    <figure><img src="media/screenshots/analyze.png" loading="lazy" width="640" height="480" alt="analyze: the domain, the intercepts, the asymptotes of a function"><figcaption>analyze(f)</figcaption></figure>
-    <figure><img src="media/screenshots/stats_fit.png" loading="lazy" width="640" height="480" alt="A line fitted to data, with r and r squared"><figcaption>statistics: a fitted line</figcaption></figure>
-    <figure><img src="media/screenshots/prob_normal.png" loading="lazy" width="640" height="480" alt="The normal distribution: the area to the right of 130"><figcaption>probability: the normal curve</figcaption></figure>
-    <figure><img src="media/screenshots/themes_grid.png" loading="lazy" width="640" height="480" alt="The themes card: nine tiles, each in its own colors"><figcaption>more &rarr; Themes</figcaption></figure>
+    <figure><img src="media/screenshots/kinematics.png" loading="lazy" width="640" height="480" alt="Angular kinematics: the equation without the acceleration gives the angle turned, 157.1 rad"><figcaption>kinematics: the right equation</figcaption></figure>
+    <figure><img src="media/screenshots/torque.png" loading="lazy" width="640" height="480" alt="The torque of a force at 20 degrees from perpendicular"><figcaption>torque: the angle read right</figcaption></figure>
+    <figure><img src="media/screenshots/nettorque.png" loading="lazy" width="640" height="480" alt="Net torque on a pulley: 6.72 minus 8.52, -1.8 N m"><figcaption>net torque</figcaption></figure>
+    <figure><img src="media/screenshots/beam_known.png" loading="lazy" width="640" height="480" alt="A beam on two supports: what you know"><figcaption>a beam: what you know</figcaption></figure>
+    <figure><img src="media/screenshots/beam.png" loading="lazy" width="640" height="480" alt="A beam on two supports: torques, then forces"><figcaption>a beam in equilibrium</figcaption></figure>
+    <figure><img src="media/screenshots/parallelaxis.png" loading="lazy" width="640" height="480" alt="The parallel axis theorem solved for I com"><figcaption>the parallel axis theorem</figcaption></figure>
+    <figure><img src="media/screenshots/pulley.png" loading="lazy" width="640" height="480" alt="A hanging mass on a solid disk pulley"><figcaption>a heavy pulley</figcaption></figure>
+    <figure><img src="media/screenshots/atwood.png" loading="lazy" width="640" height="480" alt="An Atwood machine with a heavy pulley"><figcaption>an Atwood machine</figcaption></figure>
+    <figure><img src="media/screenshots/rolling.png" loading="lazy" width="640" height="480" alt="A sphere rolling down a ramp: v = square root of 2 g h over 1 plus k"><figcaption>rolling down a ramp</figcaption></figure>
+    <figure><img src="media/screenshots/disks.png" loading="lazy" width="640" height="480" alt="Two disks that grab: angular momentum conserved"><figcaption>angular momentum</figcaption></figure>
+    <figure><img src="media/screenshots/conversion.png" loading="lazy" width="640" height="480" alt="1200 rpm to rad/s: 125.7 rad/s"><figcaption>more &rarr; Unit conversions</figcaption></figure>
+    <figure><img src="media/screenshots/reference.png" loading="lazy" width="640" height="480" alt="The formula reference: moments of inertia"><figcaption>more &rarr; Formula reference</figcaption></figure>
   </div>
   <ul class="tips">
-    <li><kbd>F1</kbd>–<kbd>F5</kbd> menus</li>
+    <li><kbd>F1</kbd>–<kbd>F4</kbd> problems</li>
+    <li><kbd>F5</kbd> more</li>
     <li><kbd>▲</kbd> history</li>
-    <li><kbd>▼</kbd> search commands</li>
-    <li><kbd>F4</kbd> other forms</li>
     <li><kbd>enter</kbd> after an answer: its steps</li>
-    <li><kbd>&#9654;</kbd> after an answer: what next</li>
+    <li><kbd>(-)</kbd> after a number: a unit</li>
     <li><kbd>on</kbd> stops a calculation</li>
   </ul>
 </section>
 </main>
 
 <footer class="wrap foot">
-  <p>FlowCE, by Tommy Bell, is a fork of <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/">KhiCAS</a> by Bernard Parisse. Math engine: Giac, by Bernard Parisse and contributors (Institut Fourier, Université Grenoble Alpes). Console adapted from Eigenmath for the Casio Prizm by G. Maia, Mike Smith, Nemhardy and LePhenixNoir. Thanks to Adrien Bertrand, Xavier Andreani and the TI-83/84 community, especially Jacob Young, commandblockguy and Matt Waltz. Installer: <a href="https://yvantt.github.io/arTIfiCE/">arTIfiCE</a> by YvanTT; this page's USB code is adapted from <a href="https://github.com/Timendus/ticalc-usb">ticalc-usb</a> by Tim Franssen and <a href="https://github.com/debrouxl/tilibs">tilibs</a>. Fonts: Atkinson Hyperlegible and STIX Two.</p>
-  <p>Free software under the <a href="https://github.com/tommyb3ll/FlowCE/blob/main/LICENSE">GNU GPL</a> v3 or later, with no warranty. FlowCE is a computer algebra system: follow your class and test rules. Not affiliated with Texas Instruments; TI-84 Plus CE is a trademark of Texas Instruments.</p>
-  <p>Parts of FlowCE 2.0 (the algebra steps, the graph screen, analyze, statistics and probability) were adapted from <a href="https://github.com/bupfff/DeltaCE">DeltaCE</a>, a GPL-3.0 fork of FlowCE.</p>
+  <p>Phy CE is a fork of <a href="https://github.com/tommyb3ll/FlowCE">FlowCE</a> by Tommy Bell, itself a fork of <a href="https://www-fourier.univ-grenoble-alpes.fr/~parisse/">KhiCAS</a> by Bernard Parisse: FlowCE's interface, its look and its steps' page, with physics in place of calculus. Math engine: Giac, by Bernard Parisse and contributors (Institut Fourier, Université Grenoble Alpes). Console adapted from Eigenmath for the Casio Prizm by G. Maia, Mike Smith, Nemhardy and LePhenixNoir. Thanks to Adrien Bertrand, Xavier Andreani and the TI-83/84 community, especially Jacob Young, commandblockguy and Matt Waltz. Installer: <a href="https://yvantt.github.io/arTIfiCE/">arTIfiCE</a> by YvanTT; this page's USB code is adapted from <a href="https://github.com/Timendus/ticalc-usb">ticalc-usb</a> by Tim Franssen and <a href="https://github.com/debrouxl/tilibs">tilibs</a>. Fonts: Atkinson Hyperlegible and STIX Two.</p>
+  <p>Free software under the <a href="https://github.com/nothanro/PhyCE/blob/main/LICENSE">GNU GPL</a> v3 or later, with no warranty. Phy CE solves problems step by step: follow your class and test rules. Not affiliated with Texas Instruments or with FlowCE; TI-84 Plus CE is a trademark of Texas Instruments.</p>
 </footer>
 
-<!-- the live chat (chat.js): the button in the corner (who wrote last, how many are in it) opens it beside the page -->
-<button class="chat-open" id="chat-open" type="button" hidden>
-  <span class="chat-faces" id="chat-faces" aria-hidden="true"></span>
-  <span class="chat-open-text"><strong><span class="live" aria-hidden="true"></span>Live chat</strong><span class="chat-open-sub" id="chat-open-sub">with other FlowCE users</span></span>
-</button>
-<aside class="chat" id="chat" aria-label="Live chat" hidden>
-  <div class="chat-top">
-    <div>
-      <h2><span class="live" aria-hidden="true"></span>Live chat</h2>
-      <p class="chat-sub" id="chat-sub">Public chat with other FlowCE users</p>
-    </div>
-    <button class="chat-close" id="chat-close" type="button" aria-label="Close the chat">×</button>
-  </div>
-  <ul class="chat-log" id="chat-log" aria-live="polite" aria-label="Messages"></ul>
-  <form class="chat-form" id="chat-form" autocomplete="off">
-    <p class="chat-replying" id="chat-replying" hidden><span class="chat-replying-text">Replying to <b id="chat-replying-to"></b>: <span id="chat-replying-gist"></span></span><button class="chat-close" id="chat-reply-cancel" type="button" aria-label="Cancel the reply">×</button></p>
-    <input id="chat-name" maxlength="24" placeholder="Your name (everyone sees it)" aria-label="Your name" disabled>
-    <input id="chat-text" maxlength="300" placeholder="Message everyone" aria-label="Message" disabled>
-    <button class="btn primary" type="submit" disabled>Send</button>
-  </form>
-  <p class="fine chat-note"><span id="chat-as" hidden>Posting as <b id="chat-as-name"></b><span class="chat-badge" id="chat-as-badge" hidden>Creator</span> (<button class="chat-rename" id="chat-rename" type="button">change</button>). </span>Be kind, and leave out anything personal. <button class="chat-rename" id="chat-creator" type="button" hidden>Creator sign-in</button> <span id="chat-status" class="chat-status" role="status"></span></p>
-</aside>
-
 <script type="module" src="installer.js"></script>
-<script type="module" src="chat.js"></script>
-<!-- visits and installs, counted by GoatCounter: no cookies, nothing personal; the counts are private -->
-<script data-goatcounter="https://flowce.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
   // a link to #new (the top bar, the pill) opens what's new
   (function () {
@@ -295,24 +239,6 @@
     window.addEventListener('hashchange', open);
     open();
   })();
-</script>
-<script>
-// the top's switch: FlowCE (first) or KhiCAS + Flow, its text and its screen; its Install picks it below
-(() => {
-  const btns = document.querySelectorAll('.show-pick button');
-  const shown = () => document.querySelector('.show-pick button.on').dataset.show;
-  const show = app => {
-    btns.forEach(b => { const on = b.dataset.show === app; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
-    document.querySelectorAll('.show[data-app]').forEach(e => { e.hidden = e.dataset.app !== app; });
-  };
-  btns.forEach(b => b.addEventListener('click', () => show(b.dataset.show)));
-  const asked = new URLSearchParams(location.search).get('build');
-  if (asked === 'khicas' || asked === 'python') show('khicas');
-  document.getElementById('hero-install').addEventListener('click', () => {
-    const r = document.querySelector(`input[name="build"][value="${shown() === 'khicas' ? 'khicas' : 'normal'}"]`);
-    if (r && !r.checked && !r.dataset.off) { r.checked = true; r.dispatchEvent(new Event('change')); }
-  });
-})();
 </script>
 </body>
 </html>

@@ -27,7 +27,8 @@ UI_SIZES = [9, 10, 12]
 ASCII = [chr(c) for c in range(32, 127)]
 # characters outside ASCII, by glyph code 0x80 + index (ui_font.c maps code points to these)
 EXTRA = ['π', '−', '·', 'θ', 'Σ', '±', '×', '∞',
-         '→', '≤', '≥', '≠', '≈', '…', 'μ', 'σ', 'λ']  # (μ σ λ: text faces only, add_text_greek.py)
+         '→', '≤', '≥', '≠', '≈', '…', 'μ', 'σ', 'λ',  # (μ σ λ: text faces only, add_text_greek.py)
+         'ω', 'α', 'τ', 'φ', 'Δ', '°']  # (Phy CE: math faces only, add_math_greek.py)
 # upright math: digits, lowercase (function names), punctuation, symbols; uppercase upright
 # falls back to the italic face. Symbols STIX Two Text lacks come from STIX Two Math.
 MATH_UP = [c for c in ASCII if not c.isupper() and c not in '@#$%&`' + chr(92)] + EXTRA[:13]
